@@ -1,89 +1,2647 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#333A7B" />
+  <title>E-Inventaris Sekolah - Sistem Manajemen Aset & Sarpras</title>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/13.4.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/13.4.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/13.4.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/13.4.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/13.4.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/13.4.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/13.4.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/13.4.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/13.4.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/13.4.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+  <!-- PWA Manifest via Data URI -->
+  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22E-Inventaris%20Sekolah%22%2C%22short_name%22%3A%22E-Inventaris%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23F1F5F9%22%2C%22theme_color%22%3A%22%23333A7B%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Butf8%2C%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Crect%20width%3D%27100%27%20height%3D%27100%27%20rx%3D%2720%27%20fill%3D%27%23333A7B%27%2F%3E%3Ctext%20x%3D%2750%27%20y%3D%2765%27%20font-size%3D%2750%27%20text-anchor%3D%27middle%27%20fill%3D%27white%27%20font-family%3D%27sans-serif%27%20font-weight%3D%27bold%27%3EEI%3C%2Ftext%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D" />
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              sidebar: '#333A7B',
+              sidebarHover: '#272D63',
+              blue: '#1E3A8A',
+              sky: '#0284C7',
+              canvas: '#F1F5F9',
+              pink: '#FF0066',
+              cyan: '#0EA5E9',
+              amber: '#F59E0B',
+              emerald: '#00C853',
+            }
+          }
+        }
       }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+    };
+  </script>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- SheetJS (XLSX) untuk Export/Import Excel -->
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+  <style>
+    /* Full Page Wrapper untuk menutupi elemen bawaan Blogger jika disematkan di widget */
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #F1F5F9;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #1E293B;
+      overflow-x: hidden;
+    }
+
+    #app-root {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background-color: #F1F5F9;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+
+    /* Glassmorphism Utilities */
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .glass-nav-mobile {
+      background: rgba(51, 58, 123, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    /* Responsive Layout Media Queries */
+    @media (min-width: 1024px) {
+      .desktop-sidebar {
+        display: flex !important;
+        width: 256px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 40;
+      }
+      .main-workspace {
+        margin-left: 256px;
+        padding-bottom: 2rem;
+      }
+      .mobile-bottom-nav {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 1023px) {
+      .desktop-sidebar {
+        display: none !important;
+      }
+      .main-workspace {
+        margin-left: 0;
+        padding-bottom: 6.5rem;
+      }
+      .mobile-bottom-nav {
+        display: flex !important;
+      }
+    }
+
+    /* Print Styling untuk Laporan & Cetak Label */
+    @media print {
+      #app-root {
+        position: static;
+        overflow: visible;
+        background: #FFFFFF !important;
+      }
+      .no-print, .desktop-sidebar, .mobile-bottom-nav {
+        display: none !important;
+      }
+      .main-workspace {
+        margin-left: 0 !important;
+        padding: 0 !important;
+      }
+      body.printing-labels .main-workspace {
+        display: none !important;
+      }
+      body.printing-labels #label-modal-overlay {
+        position: static !important;
+        background: transparent !important;
+        padding: 0 !important;
+        display: block !important;
+      }
+      body.printing-labels #label-modal-box {
+        box-shadow: none !important;
+        border: none !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      body.printing-labels #label-print-area {
+        max-height: none !important;
+        overflow: visible !important;
+        padding: 0 !important;
+        background: #FFFFFF !important;
+        border: none !important;
+      }
+      .label-card-item {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+  <style id="dynamic-print-page-style"></style>
+</head>
+<body>
+  <div id="app-root"></div>
+
+  <!-- Firebase & Application Logic -->
+  <script type="module">
+    // =========================================================================
+    // KONFIGURASI APLIKASI (SAKLAR MODE)
+    // =========================================================================
+    const IS_PREVIEW = false; // Ubah menjadi false SAAT DEPLOY / PUBLISH agar terhubung murni ke Firebase tanpa data dummy
+
+    // PASTE FIREBASE CONFIG ANDA DI SINI
+    const firebaseConfig = {
+    apiKey: "AIzaSyCuVi_jkYAACqXZrvhrWZeq5SvKs49WYDg",
+  authDomain: "e-inventaris-sr.firebaseapp.com",
+  projectId: "e-inventaris-sr",
+  storageBucket: "e-inventaris-sr.firebasestorage.app",
+  messagingSenderId: "324493737434",
+  appId: "1:324493737434:web:649020271b572b0018d4e3"
+    };
+
+    // =========================================================================
+    // INISIALISASI FIREBASE SDK (HANYA AKTIF JIKA IS_PREVIEW === false)
+    // =========================================================================
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      getFirestore, collection, doc, getDocs, setDoc, addDoc, updateDoc, deleteDoc,
+      query, where, orderBy, limit, onSnapshot, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    let auth = null;
+    let db = null;
+
+    if (!IS_PREVIEW) {
+      try {
+        const app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+      } catch (err) {
+        console.error("Gagal inisialisasi Firebase:", err);
+      }
+    }
+
+    // =========================================================================
+    // PWA SERVICE WORKER DINAMIS VIA BLOB
+    // =========================================================================
+    if ('serviceWorker' in navigator) {
+      const swCode = `
+        const CACHE_NAME = 'e-inventaris-v1';
+        self.addEventListener('install', (e) => self.skipWaiting());
+        self.addEventListener('activate', (e) => e.waitUntil(clients.claim()));
+        self.addEventListener('fetch', (e) => {
+          e.respondWith(fetch(e.request).catch(() => new Response('Offline mode')));
+        });
+      `;
+      const blob = new Blob([swCode], { type: 'application/javascript' });
+      const swUrl = URL.createObjectURL(blob);
+      navigator.serviceWorker.register(swUrl).catch(() => {});
+    }
+
+    // =========================================================================
+    // STATE MANAGEMENT APLIKASI
+    // =========================================================================
+    const state = {
+      currentUser: null, // { id, name, role: 'admin' | 'user', emailOrUsername }
+      activeMenu: 'dashboard',
+      loginTab: 'admin', // 'admin' | 'user'
+      searchQuery: '',
+      filterKondisi: 'all',
+      filterRuangan: 'all',
+      loading: false,
+      modal: null, // { type, mode, data, modul, labelMode, labelQty }
+      toast: null, // { message, type: 'success' | 'error' | 'info' }
+      unsubscribers: [],
+
+      // Master & Transactional Data
+      identitas: {
+        namaSekolah: 'SMAS PLUS DOWA AL-ISLAMI SATU',
+        jenjang: 'SMA',
+        kepalaSekolah: 'RUDIDOWA, S.Pd.I., M.M.',
+        tahunPelajaran: 'Tahun Pelajaran 2023 - 2024',
+        logoUrl: ''
+      },
+      barang: [],
+      pinjaman: [],
+      ruangan: [],
+      sumber: [],
+      users: [],
+      logs: []
+    };
+
+    // =========================================================================
+    // HELPER FUNCTIONS
+    // =========================================================================
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function formatTanggalIndonesia(dateObj = new Date()) {
+      const bulan = [
+        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+      ];
+      const d = String(dateObj.getDate()).padStart(2, '0');
+      const m = bulan[dateObj.getMonth()];
+      const y = dateObj.getFullYear();
+      return `${d} ${m} ${y}`;
+    }
+
+    function formatTimestampSekarang() {
+      const now = new Date();
+      const tgl = formatTanggalIndonesia(now);
+      const jam = String(now.getHours()).padStart(2, '0');
+      const mnt = String(now.getMinutes()).padStart(2, '0');
+      return `${tgl}, ${jam}:${mnt} WIB`;
+    }
+
+    let toastTimer = null;
+    function showToast(message, type = 'success') {
+      state.toast = { message, type };
+      render();
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        state.toast = null;
+        render();
+      }, 3500);
+    }
+
+    function triggerPrintLabels() {
+      const paperSize = (state.modal && state.modal.paperSize) || 'A4';
+      const pageStyleEl = document.getElementById('dynamic-print-page-style');
+      if (pageStyleEl) {
+        pageStyleEl.textContent = paperSize === 'Legal'
+          ? '@media print { @page { size: 216mm 330mm portrait; margin: 10mm; } }'
+          : '@media print { @page { size: A4 portrait; margin: 10mm; } }';
+      }
+
+      document.body.classList.add('printing-labels');
+      window.print();
+      setTimeout(() => {
+        document.body.classList.remove('printing-labels');
+      }, 500);
+    }
+
+    // =========================================================================
+    // DATA DUMMY STRICT (HANYA DIMUAT JIKA IS_PREVIEW === true, MAKS 2 PER KOLEKSI)
+    // =========================================================================
+    function initPreviewData() {
+      if (!IS_PREVIEW) return;
+
+      state.identitas = {
+        namaSekolah: 'SMAS PLUS DOWA AL-ISLAMI SATU',
+        jenjang: 'SMA',
+        kepalaSekolah: 'RUDIDOWA, S.Pd.I., M.M.',
+        tahunPelajaran: 'Tahun Pelajaran 2023 - 2024',
+        logoUrl: ''
+      };
+
+      state.ruangan = [
+        { id: 'r1', kodeRuang: 'R-001', namaRuang: 'Lab Komputer Utama', penanggungJawab: 'Ahmad Fauzi, S.Kom', keterangan: 'Lantai 2 Gedung A' },
+        { id: 'r2', kodeRuang: 'R-002', namaRuang: 'Ruang Guru & Tata Usaha', penanggungJawab: 'Siti Aminah, S.Pd', keterangan: 'Lantai 1 Gedung Utama' }
+      ];
+
+      state.sumber = [
+        { id: 's1', kodeSumber: 'SB-01', namaSumber: 'Dana BOS Reguler', keterangan: 'Anggaran Bantuan Operasional Sekolah' },
+        { id: 's2', kodeSumber: 'SB-02', namaSumber: 'Hibah Komite & Yayasan', keterangan: 'Bantuan sarana pendidikan yayasan' }
+      ];
+
+      state.barang = [
+        {
+          id: 'b1',
+          kodeBarang: 'INV-2024-001',
+          namaBarang: 'Komputer All-in-One Lenovo',
+          sumberId: 's1',
+          namaSumber: 'Dana BOS Reguler',
+          ruanganId: 'r1',
+          namaRuangan: 'Lab Komputer Utama',
+          jumlah: 20,
+          kondisi: 'Baik',
+          tahunPerolehan: '2024',
+          keterangan: 'Unit praktikum TIK siswa',
+          bastUrl: 'https://drive.google.com',
+          bastNama: 'BAST_Komputer_BOS_2024.pdf'
+        },
+        {
+          id: 'b2',
+          kodeBarang: 'INV-2023-014',
+          namaBarang: 'Proyektor Epson EB-X500',
+          sumberId: 's2',
+          namaSumber: 'Hibah Komite & Yayasan',
+          ruanganId: 'r2',
+          namaRuangan: 'Ruang Guru & Tata Usaha',
+          jumlah: 13,
+          kondisi: 'Rusak Ringan',
+          tahunPerolehan: '2023',
+          keterangan: 'Perlu pembersihan filter lensa pada 2 unit',
+          bastUrl: '',
+          bastNama: ''
+        }
+      ];
+
+      state.pinjaman = [
+        {
+          id: 'p1',
+          kodePinjam: 'PJM-001',
+          peminjam: 'OSIS / Panitia Kegiatan',
+          barangId: 'b2',
+          namaBarang: 'Proyektor Epson EB-X500',
+          jumlah: 2,
+          tglPinjam: '2026-11-15',
+          tglKembali: '2026-11-20',
+          status: 'Dipinjam',
+          catatan: 'Seminar LDKS Aula Utama'
+        },
+        {
+          id: 'p2',
+          kodePinjam: 'PJM-002',
+          peminjam: 'Tim Simulasi ANBK',
+          barangId: 'b1',
+          namaBarang: 'Komputer All-in-One Lenovo',
+          jumlah: 5,
+          tglPinjam: '2026-11-01',
+          tglKembali: '2026-11-05',
+          status: 'Dikembalikan',
+          catatan: 'Gladi bersih asesmen'
+        }
+      ];
+
+      state.users = [
+        { id: 'u1', username: 'petugas1', password: '123', namaLengkap: 'Budi Santoso, S.Pd', jabatan: 'Staf Sarpras', role: 'user' }
+      ];
+
+      state.logs = [
+        { id: 'l1', aktivitas: 'Login Berhasil ke Sistem E-Inventaris', user: 'Rudi Dowa', timestamp: formatTimestampSekarang() },
+        { id: 'l2', aktivitas: 'Sinkronisasi Data Inventaris & Bukti BAST', user: 'Admin Sarpras', timestamp: 'Kemarin, 14:20 WIB' }
+      ];
+    }
+
+    // =========================================================================
+    // SINKRONISASI FIRESTORE REAL-TIME (SAAT IS_PREVIEW === false)
+    // =========================================================================
+    function detachListeners() {
+      state.unsubscribers.forEach(unsub => {
+        try { unsub(); } catch (e) {}
+      });
+      state.unsubscribers = [];
+    }
+
+    function attachFirestoreListeners() {
+      if (IS_PREVIEW || !db) return;
+      detachListeners();
+
+      // 1. Identitas Sekolah
+      const unsubIdentitas = onSnapshot(doc(db, 'settings', 'identitas'), (snap) => {
+        if (snap.exists()) {
+          state.identitas = { ...state.identitas, ...snap.data() };
+          render();
         }
       });
-    </script>
-  </body>
+      state.unsubscribers.push(unsubIdentitas);
+
+      // 2. Koleksi Master & Transaksi
+      const collections = ['barang', 'pinjaman', 'ruangan', 'sumber', 'users'];
+      collections.forEach(colName => {
+        const unsub = onSnapshot(collection(db, colName), (snap) => {
+          state[colName] = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+          render();
+        });
+        state.unsubscribers.push(unsub);
+      });
+
+      // 3. Log Aktivitas
+      const qLogs = query(collection(db, 'logs'), orderBy('createdAt', 'desc'), limit(25));
+      const unsubLogs = onSnapshot(qLogs, (snap) => {
+        state.logs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        render();
+      });
+      state.unsubscribers.push(unsubLogs);
+    }
+
+    async function recordActivityLog(aktivitas) {
+      const userName = state.currentUser ? state.currentUser.name : 'Sistem';
+      const entry = {
+        aktivitas,
+        user: userName,
+        timestamp: formatTimestampSekarang()
+      };
+
+      if (IS_PREVIEW) {
+        state.logs.unshift({ id: 'log-' + Date.now(), ...entry });
+        return;
+      }
+
+      if (db) {
+        try {
+          await addDoc(collection(db, 'logs'), {
+            ...entry,
+            createdAt: serverTimestamp()
+          });
+        } catch (err) {
+          console.error('Gagal mencatat log:', err);
+        }
+      }
+    }
+
+    // =========================================================================
+    // AUTENTIKASI HYBRID (ADMIN VIA FIREBASE AUTH, USER VIA FIRESTORE)
+    // =========================================================================
+    async function handleLoginAdmin(email, password) {
+      state.loading = true;
+      render();
+
+      try {
+        if (IS_PREVIEW) {
+          if (email === 'admin@sekolah.sch.id' && password === 'admin123') {
+            initPreviewData();
+            state.currentUser = {
+              id: 'admin-demo',
+              name: 'Rudi Dowa (Admin)',
+              role: 'admin',
+              emailOrUsername: email
+            };
+            await recordActivityLog('Login Berhasil (Administrator)');
+            showToast('Selamat datang kembali, Administrator!');
+          } else {
+            showToast('Email atau password demo salah! Gunakan admin@sekolah.sch.id / admin123', 'error');
+          }
+        } else {
+          if (!auth) throw new Error('Firebase Auth belum terkonfigurasi.');
+          const cred = await signInWithEmailAndPassword(auth, email, password);
+          state.currentUser = {
+            id: cred.user.uid,
+            name: cred.user.displayName || email.split('@')[0],
+            role: 'admin',
+            emailOrUsername: cred.user.email
+          };
+          attachFirestoreListeners();
+          await recordActivityLog(`Login Admin (${cred.user.email})`);
+          showToast('Berhasil masuk sebagai Administrator!');
+        }
+      } catch (err) {
+        console.error('Login Admin Error:', err);
+        showToast('Login gagal: Periksa kembali email & password Admin Anda.', 'error');
+      } finally {
+        state.loading = false;
+        render();
+      }
+    }
+
+    async function handleLoginUser(username, password) {
+      state.loading = true;
+      render();
+
+      try {
+        if (IS_PREVIEW) {
+          initPreviewData();
+          const found = state.users.find(u => u.username === username && u.password === password);
+          if (found) {
+            state.currentUser = {
+              id: found.id,
+              name: found.namaLengkap,
+              role: 'user',
+              emailOrUsername: found.username
+            };
+            await recordActivityLog(`Login Petugas (${found.namaLengkap})`);
+            showToast(`Selamat datang, ${found.namaLengkap}!`);
+          } else {
+            showToast('Username atau password petugas demo salah! Gunakan petugas1 / 123', 'error');
+          }
+        } else {
+          if (!db) throw new Error('Firestore belum terkonfigurasi.');
+          const qUser = query(
+            collection(db, 'users'),
+            where('username', '==', username.trim()),
+            where('password', '==', password)
+          );
+          const snap = await getDocs(qUser);
+          if (!snap.empty) {
+            const docSnap = snap.docs[0];
+            const userData = docSnap.data();
+            state.currentUser = {
+              id: docSnap.id,
+              name: userData.namaLengkap || username,
+              role: 'user',
+              emailOrUsername: userData.username
+            };
+            attachFirestoreListeners();
+            await recordActivityLog(`Login Petugas (${state.currentUser.name})`);
+            showToast(`Selamat datang, ${state.currentUser.name}!`);
+          } else {
+            showToast('Akun petugas tidak ditemukan atau password salah.', 'error');
+          }
+        }
+      } catch (err) {
+        console.error('Login User Error:', err);
+        showToast('Terjadi kesalahan saat memverifikasi akun petugas.', 'error');
+      } finally {
+        state.loading = false;
+        render();
+      }
+    }
+
+    async function handleLogout() {
+      if (!IS_PREVIEW && auth && state.currentUser?.role === 'admin') {
+        try { await signOut(auth); } catch (e) {}
+      }
+      detachListeners();
+      state.currentUser = null;
+      state.activeMenu = 'dashboard';
+      state.modal = null;
+      render();
+      showToast('Anda telah keluar dari sistem.', 'info');
+    }
+
+    // =========================================================================
+    // OPERASI CRUD (DUAL-MODE: IN-MEMORY PREVIEW & FIRESTORE PRODUKSI)
+    // =========================================================================
+    async function saveData(colName, payload, docId = null) {
+      try {
+        if (colName === 'identitas') {
+          if (IS_PREVIEW) {
+            state.identitas = { ...state.identitas, ...payload };
+          } else if (db) {
+            await setDoc(doc(db, 'settings', 'identitas'), payload, { merge: true });
+          }
+          await recordActivityLog('Memperbarui Identitas Pendidikan');
+          showToast('Identitas pendidikan berhasil disimpan!');
+          render();
+          return;
+        }
+
+        if (IS_PREVIEW) {
+          if (docId) {
+            const idx = state[colName].findIndex(i => i.id === docId);
+            if (idx !== -1) state[colName][idx] = { ...state[colName][idx], ...payload };
+            await recordActivityLog(`Memperbarui data ${colName}`);
+            showToast('Data berhasil diperbarui!');
+          } else {
+            state[colName].unshift({ id: colName[0] + '-' + Date.now(), ...payload });
+            await recordActivityLog(`Menambahkan data ${colName} baru`);
+            showToast('Data baru berhasil ditambahkan!');
+          }
+        } else if (db) {
+          if (docId) {
+            await updateDoc(doc(db, colName, docId), { ...payload, updatedAt: serverTimestamp() });
+            await recordActivityLog(`Memperbarui data ${colName}`);
+            showToast('Data berhasil diperbarui ke Firestore!');
+          } else {
+            await addDoc(collection(db, colName), { ...payload, createdAt: serverTimestamp() });
+            await recordActivityLog(`Menambahkan data ${colName} baru`);
+            showToast('Data berhasil disimpan ke Firestore!');
+          }
+        }
+
+        state.modal = null;
+        render();
+      } catch (err) {
+        console.error('Save Error:', err);
+        showToast('Gagal menyimpan data: ' + err.message, 'error');
+      }
+    }
+
+    async function deleteData(colName, docId, label = '') {
+      try {
+        if (IS_PREVIEW) {
+          state[colName] = state[colName].filter(i => i.id !== docId);
+        } else if (db) {
+          await deleteDoc(doc(db, colName, docId));
+        }
+        await recordActivityLog(`Menghapus ${colName}: ${label}`);
+        state.modal = null;
+        showToast('Data berhasil dihapus!');
+        render();
+      } catch (err) {
+        console.error('Delete Error:', err);
+        showToast('Gagal menghapus data: ' + err.message, 'error');
+      }
+    }
+
+    async function toggleStatusPinjaman(pinjamId) {
+      const item = state.pinjaman.find(p => p.id === pinjamId);
+      if (!item) return;
+
+      const newStatus = item.status === 'Dipinjam' ? 'Dikembalikan' : 'Dipinjam';
+      const tglKembaliActual = newStatus === 'Dikembalikan'
+        ? new Date().toISOString().split('T')[0]
+        : item.tglKembali;
+
+      await saveData('pinjaman', { status: newStatus, tglKembali: tglKembaliActual }, pinjamId);
+    }
+
+    // =========================================================================
+    // FITUR EXPORT & IMPORT EXCEL (SHEETJS XLSX) - MODUL BARANG & PINJAMAN
+    // =========================================================================
+    function exportToExcel(modul) {
+      if (typeof XLSX === 'undefined') {
+        showToast('Library Excel belum siap, coba beberapa saat lagi.', 'error');
+        return;
+      }
+
+      if (modul === 'barang') {
+        if (state.barang.length === 0) {
+          showToast('Tidak ada data barang untuk diexport.', 'info');
+          return;
+        }
+        const rows = state.barang.map((b, i) => ({
+          'No': i + 1,
+          'Kode Barang': b.kodeBarang || '',
+          'Nama Barang': b.namaBarang || '',
+          'Ruangan': b.namaRuangan || '',
+          'Sumber Barang': b.namaSumber || '',
+          'Jumlah': Number(b.jumlah) || 0,
+          'Kondisi': b.kondisi || 'Baik',
+          'Tahun Perolehan': b.tahunPerolehan || '',
+          'Link / Bukti BAST': b.bastUrl || b.bastNama || '-',
+          'Keterangan': b.keterangan || ''
+        }));
+        const ws = XLSX.utils.json_to_sheet(rows);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Data Barang');
+        XLSX.writeFile(wb, `Data_Barang_Inventaris_${new Date().toISOString().slice(0, 10)}.xlsx`);
+        recordActivityLog('Export Data Barang ke Excel (.xlsx)');
+        showToast('Berhasil mengunduh file Excel Data Barang!');
+      } else if (modul === 'pinjaman') {
+        if (state.pinjaman.length === 0) {
+          showToast('Tidak ada data pinjaman untuk diexport.', 'info');
+          return;
+        }
+        const rows = state.pinjaman.map((p, i) => ({
+          'No': i + 1,
+          'Kode Pinjam': p.kodePinjam || '',
+          'Peminjam / Unit': p.peminjam || '',
+          'Nama Barang': p.namaBarang || '',
+          'Jumlah': Number(p.jumlah) || 1,
+          'Tanggal Pinjam': p.tglPinjam || '',
+          'Tanggal Kembali': p.tglKembali || '',
+          'Status': p.status || 'Dipinjam',
+          'Catatan': p.catatan || ''
+        }));
+        const ws = XLSX.utils.json_to_sheet(rows);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Data Pinjaman');
+        XLSX.writeFile(wb, `Data_Pinjaman_Inventaris_${new Date().toISOString().slice(0, 10)}.xlsx`);
+        recordActivityLog('Export Data Pinjaman ke Excel (.xlsx)');
+        showToast('Berhasil mengunduh file Excel Data Pinjaman!');
+      }
+    }
+
+    function downloadTemplateExcel(modul) {
+      if (typeof XLSX === 'undefined') return;
+      const wb = XLSX.utils.book_new();
+
+      if (modul === 'barang') {
+        const sample = [{
+          'Kode Barang': 'INV-2026-001',
+          'Nama Barang': 'Meja Siswa Kayu Jati',
+          'Ruangan': state.ruangan[0]?.namaRuang || 'Ruang Kelas X',
+          'Sumber Barang': state.sumber[0]?.namaSumber || 'Dana BOS Reguler',
+          'Jumlah': 30,
+          'Kondisi': 'Baik',
+          'Tahun Perolehan': '2026',
+          'Link BAST': 'https://drive.google.com/file/d/contoh',
+          'Keterangan': 'Pengadaan semester ganjil'
+        }];
+        const ws = XLSX.utils.json_to_sheet(sample);
+        XLSX.utils.book_append_sheet(wb, ws, 'Template Barang');
+        XLSX.writeFile(wb, 'Template_Import_Barang.xlsx');
+      } else if (modul === 'pinjaman') {
+        const sample = [{
+          'Kode Pinjam': 'PJM-010',
+          'Peminjam / Unit': 'Guru Olahraga',
+          'Nama Barang': state.barang[0]?.namaBarang || 'Proyektor Epson',
+          'Jumlah': 1,
+          'Tanggal Pinjam': new Date().toISOString().slice(0, 10),
+          'Tanggal Kembali': new Date().toISOString().slice(0, 10),
+          'Status': 'Dipinjam',
+          'Catatan': 'Kegiatan pembelajaran di aula'
+        }];
+        const ws = XLSX.utils.json_to_sheet(sample);
+        XLSX.utils.book_append_sheet(wb, ws, 'Template Pinjaman');
+        XLSX.writeFile(wb, 'Template_Import_Pinjaman.xlsx');
+      }
+      showToast('Template Excel berhasil diunduh!');
+    }
+
+    async function handleImportExcelFile(file, modul) {
+      if (!file || typeof XLSX === 'undefined') return;
+
+      const reader = new FileReader();
+      reader.onload = async (evt) => {
+        try {
+          const data = new Uint8Array(evt.target.result);
+          const workbook = XLSX.read(data, { type: 'array' });
+          const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+          const rows = XLSX.utils.sheet_to_json(firstSheet, { defval: '' });
+
+          if (!rows || rows.length === 0) {
+            showToast('File Excel kosong atau format tidak terbaca.', 'error');
+            return;
+          }
+
+          let importedCount = 0;
+
+          if (modul === 'barang') {
+            for (const r of rows) {
+              const namaBarang = r['Nama Barang'] || r['namaBarang'];
+              if (!namaBarang) continue;
+
+              const namaRuangInput = String(r['Ruangan'] || r['namaRuangan'] || '').trim();
+              const matchedRuang = state.ruangan.find(rm => rm.namaRuang.toLowerCase() === namaRuangInput.toLowerCase());
+
+              const namaSumberInput = String(r['Sumber Barang'] || r['Sumber'] || r['namaSumber'] || '').trim();
+              const matchedSumber = state.sumber.find(sm => sm.namaSumber.toLowerCase() === namaSumberInput.toLowerCase());
+
+              const linkBast = String(r['Link BAST'] || r['Link / Bukti BAST'] || r['bastUrl'] || '').trim();
+
+              const payload = {
+                kodeBarang: String(r['Kode Barang'] || r['kodeBarang'] || `INV-${Date.now().toString().slice(-4)}`),
+                namaBarang: String(namaBarang),
+                ruanganId: matchedRuang ? matchedRuang.id : '',
+                namaRuangan: matchedRuang ? matchedRuang.namaRuang : (namaRuangInput || '-'),
+                sumberId: matchedSumber ? matchedSumber.id : '',
+                namaSumber: matchedSumber ? matchedSumber.namaSumber : (namaSumberInput || '-'),
+                jumlah: Number(r['Jumlah'] || r['jumlah']) || 1,
+                kondisi: ['Baik', 'Rusak Ringan', 'Rusak Menengah', 'Rusak Berat'].includes(r['Kondisi']) ? r['Kondisi'] : 'Baik',
+                tahunPerolehan: String(r['Tahun Perolehan'] || r['tahunPerolehan'] || new Date().getFullYear()),
+                bastUrl: linkBast !== '-' ? linkBast : '',
+                bastNama: linkBast && linkBast !== '-' ? 'Dokumen BAST (Import)' : '',
+                keterangan: String(r['Keterangan'] || r['keterangan'] || '')
+              };
+
+              if (IS_PREVIEW) {
+                state.barang.unshift({ id: 'b-' + Date.now() + '-' + importedCount, ...payload });
+              } else if (db) {
+                await addDoc(collection(db, 'barang'), { ...payload, createdAt: serverTimestamp() });
+              }
+              importedCount++;
+            }
+            await recordActivityLog(`Import Excel: ${importedCount} data barang ditambahkan`);
+          } else if (modul === 'pinjaman') {
+            for (const r of rows) {
+              const peminjam = r['Peminjam / Unit'] || r['Peminjam'] || r['peminjam'];
+              const namaBarangInput = String(r['Nama Barang'] || r['Barang Dipinjam'] || r['namaBarang'] || '').trim();
+              if (!peminjam || !namaBarangInput) continue;
+
+              const matchedBarang = state.barang.find(b => b.namaBarang.toLowerCase() === namaBarangInput.toLowerCase());
+
+              const payload = {
+                kodePinjam: String(r['Kode Pinjam'] || r['kodePinjam'] || `PJM-${Date.now().toString().slice(-4)}`),
+                peminjam: String(peminjam),
+                barangId: matchedBarang ? matchedBarang.id : '',
+                namaBarang: matchedBarang ? matchedBarang.namaBarang : namaBarangInput,
+                jumlah: Number(r['Jumlah'] || r['jumlah']) || 1,
+                tglPinjam: String(r['Tanggal Pinjam'] || r['Tgl Pinjam'] || new Date().toISOString().slice(0, 10)),
+                tglKembali: String(r['Tanggal Kembali'] || r['Tgl Kembali'] || ''),
+                status: r['Status'] === 'Dikembalikan' ? 'Dikembalikan' : 'Dipinjam',
+                catatan: String(r['Catatan'] || r['catatan'] || '')
+              };
+
+              if (IS_PREVIEW) {
+                state.pinjaman.unshift({ id: 'p-' + Date.now() + '-' + importedCount, ...payload });
+              } else if (db) {
+                await addDoc(collection(db, 'pinjaman'), { ...payload, createdAt: serverTimestamp() });
+              }
+              importedCount++;
+            }
+            await recordActivityLog(`Import Excel: ${importedCount} transaksi pinjaman ditambahkan`);
+          }
+
+          state.modal = null;
+          showToast(`Berhasil mengimpor ${importedCount} baris data dari Excel!`);
+          render();
+        } catch (err) {
+          console.error('Import Excel Error:', err);
+          showToast('Gagal membaca file Excel. Pastikan menggunakan format .xlsx/.xls yang valid.', 'error');
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    // =========================================================================
+    // KALKULASI STATISTIK & GRAFIK DASHBOARD
+    // =========================================================================
+    function getDashboardStats() {
+      const totalUnitBarang = state.barang.reduce((acc, b) => acc + (Number(b.jumlah) || 0), 0);
+      const totalRuangan = state.ruangan.length;
+      const totalPinjamanAktif = state.pinjaman.filter(p => p.status === 'Dipinjam').reduce((acc, p) => acc + (Number(p.jumlah) || 0), 0);
+      const totalTransaksiPinjam = state.pinjaman.length;
+      const totalSumber = state.sumber.length;
+
+      // Kondisi Barang
+      const kondisiCounts = {
+        'Baik': 0,
+        'Rusak Ringan': 0,
+        'Rusak Menengah': 0,
+        'Rusak Berat': 0
+      };
+      state.barang.forEach(b => {
+        const k = b.kondisi || 'Baik';
+        const jml = Number(b.jumlah) || 0;
+        if (kondisiCounts[k] !== undefined) {
+          kondisiCounts[k] += jml;
+        } else {
+          kondisiCounts['Baik'] += jml;
+        }
+      });
+
+      const tersedia = Math.max(0, totalUnitBarang - totalPinjamanAktif);
+      const persenTersedia = totalUnitBarang > 0 ? Math.round((tersedia / totalUnitBarang) * 100) : 100;
+      const persenDipinjam = totalUnitBarang > 0 ? Math.max(0, 100 - persenTersedia) : 0;
+
+      return {
+        totalUnitBarang,
+        totalRuangan,
+        totalTransaksiPinjam,
+        totalPinjamanAktif,
+        totalSumber,
+        kondisiCounts,
+        persenTersedia,
+        persenDipinjam
+      };
+    }
+
+    let chartInstances = {};
+
+    function renderCharts() {
+      if (state.activeMenu !== 'dashboard' || !state.currentUser) return;
+      const stats = getDashboardStats();
+
+      // Destroy previous instances
+      Object.values(chartInstances).forEach(ch => {
+        try { ch.destroy(); } catch (e) {}
+      });
+      chartInstances = {};
+
+      // 1. Vertical Bar Chart: Rekapitulasi
+      const ctxRekap = document.getElementById('chart-rekapitulasi');
+      if (ctxRekap) {
+        chartInstances.rekap = new Chart(ctxRekap, {
+          type: 'bar',
+          data: {
+            labels: ['Barang', 'Ruang', 'Pinjaman', 'Sumber'],
+            datasets: [{
+              label: 'Total Data',
+              data: [stats.totalUnitBarang, stats.totalRuangan, stats.totalTransaksiPinjam, stats.totalSumber],
+              backgroundColor: ['#FF0066', '#333A7B', '#F59E0B', '#00C853'],
+              borderRadius: 6,
+              barThickness: 28
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                grid: { color: '#E2E8F0' },
+                ticks: { font: { family: 'Plus Jakarta Sans', size: 11 }, color: '#64748B' }
+              },
+              x: {
+                grid: { display: false },
+                ticks: { font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' }, color: '#475569' }
+              }
+            }
+          }
+        });
+      }
+
+      // 2. Donut Chart: Status Ketersediaan
+      const ctxStatus = document.getElementById('chart-status');
+      if (ctxStatus) {
+        chartInstances.status = new Chart(ctxStatus, {
+          type: 'doughnut',
+          data: {
+            labels: ['Tersedia (%)', 'Dipinjam (%)'],
+            datasets: [{
+              data: [stats.persenTersedia, stats.persenDipinjam],
+              backgroundColor: ['#4A77B5', '#00C853'],
+              borderWidth: 2,
+              borderColor: '#FFFFFF'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '58%',
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  boxWidth: 10,
+                  font: { family: 'Plus Jakarta Sans', size: 11 },
+                  color: '#475569'
+                }
+              }
+            }
+          }
+        });
+      }
+
+      // 3. Horizontal Bar Chart: Kondisi Barang
+      const ctxKondisi = document.getElementById('chart-kondisi');
+      if (ctxKondisi) {
+        chartInstances.kondisi = new Chart(ctxKondisi, {
+          type: 'bar',
+          data: {
+            labels: ['Rusak Berat', 'Rusak Menengah', 'Rusak Ringan', 'Baik'],
+            datasets: [{
+              label: 'Jumlah Unit',
+              data: [
+                stats.kondisiCounts['Rusak Berat'],
+                stats.kondisiCounts['Rusak Menengah'],
+                stats.kondisiCounts['Rusak Ringan'],
+                stats.kondisiCounts['Baik']
+              ],
+              backgroundColor: ['#C2B8D1', '#9A8CB0', '#7B6B94', '#63537D'],
+              borderColor: '#4C3D63',
+              borderWidth: 1,
+              borderRadius: 4,
+              barThickness: 20
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false }
+            },
+            scales: {
+              x: {
+                beginAtZero: true,
+                grid: { color: '#F1F5F9' },
+                ticks: { font: { family: 'Plus Jakarta Sans', size: 11 }, color: '#64748B' }
+              },
+              y: {
+                grid: { display: false },
+                ticks: { font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' }, color: '#333A7B' }
+              }
+            }
+          }
+        });
+      }
+    }
+
+    // =========================================================================
+    // KOMPONEN UI: HALAMAN LOGIN HYBRID
+    // =========================================================================
+    function renderLoginView() {
+      return `
+        <div class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100">
+          <div class="w-full max-w-md glass-panel rounded-2xl shadow-xl border border-white/70 overflow-hidden">
+            <!-- Header Brand -->
+            <div class="bg-[#333A7B] px-6 py-7 text-center text-white relative">
+              <div class="w-16 h-16 mx-auto mb-3 rounded-2xl bg-white/15 backdrop-blur flex items-center justify-center border border-white/25 shadow-inner">
+                <i data-lucide="boxes" class="w-8 h-8 text-amber-300"></i>
+              </div>
+              <h1 class="text-xl font-bold tracking-wide">E-INVENTARIS</h1>
+              <p class="text-xs text-indigo-200 mt-1">Sistem Manajemen Aset & Sarana Prasarana</p>
+              ${IS_PREVIEW ? `
+                <span class="inline-flex items-center gap-1.5 mt-3 px-3 py-1 rounded-full text-[11px] font-semibold bg-amber-400/20 text-amber-200 border border-amber-300/30">
+                  <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                  MODE PREVIEW / SIMULASI
+                </span>
+              ` : ''}
+            </div>
+
+            <!-- Tab Hybrid Login -->
+            <div class="p-6">
+              <div class="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl mb-6">
+                <button type="button" data-action="switch-login-tab" data-tab="admin"
+                  class="py-2 text-xs font-semibold rounded-lg transition-all ${state.loginTab === 'admin' ? 'bg-white text-[#333A7B] shadow-sm' : 'text-slate-500 hover:text-slate-700'}">
+                  Admin (Firebase Auth)
+                </button>
+                <button type="button" data-action="switch-login-tab" data-tab="user"
+                  class="py-2 text-xs font-semibold rounded-lg transition-all ${state.loginTab === 'user' ? 'bg-white text-[#333A7B] shadow-sm' : 'text-slate-500 hover:text-slate-700'}">
+                  Petugas / User
+                </button>
+              </div>
+
+              ${state.loginTab === 'admin' ? `
+                <form id="form-login-admin" class="space-y-4">
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1.5">Email Administrator</label>
+                    <div class="relative">
+                      <i data-lucide="mail" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3"></i>
+                      <input type="email" name="email" required placeholder="admin@sekolah.sch.id"
+                        value="${IS_PREVIEW ? 'admin@sekolah.sch.id' : ''}"
+                        class="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#333A7B]/20 focus:border-[#333A7B]" />
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1.5">Password</label>
+                    <div class="relative">
+                      <i data-lucide="lock" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3"></i>
+                      <input type="password" name="password" required placeholder="••••••••"
+                        value="${IS_PREVIEW ? 'admin123' : ''}"
+                        class="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#333A7B]/20 focus:border-[#333A7B]" />
+                    </div>
+                  </div>
+                  <button type="submit" ${state.loading ? 'disabled' : ''}
+                    class="w-full py-2.5 px-4 bg-[#333A7B] hover:bg-[#272D63] text-white font-semibold text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="log-in" class="w-4 h-4"></i>
+                    <span>${state.loading ? 'Memverifikasi...' : 'Masuk sebagai Admin'}</span>
+                  </button>
+                </form>
+              ` : `
+                <form id="form-login-user" class="space-y-4">
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1.5">Username / ID Petugas</label>
+                    <div class="relative">
+                      <i data-lucide="user" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3"></i>
+                      <input type="text" name="username" required placeholder="Masukkan username petugas"
+                        value="${IS_PREVIEW ? 'petugas1' : ''}"
+                        class="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#333A7B]/20 focus:border-[#333A7B]" />
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1.5">Password Petugas</label>
+                    <div class="relative">
+                      <i data-lucide="key-round" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3"></i>
+                      <input type="password" name="password" required placeholder="••••••••"
+                        value="${IS_PREVIEW ? '123' : ''}"
+                        class="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#333A7B]/20 focus:border-[#333A7B]" />
+                    </div>
+                  </div>
+                  <button type="submit" ${state.loading ? 'disabled' : ''}
+                    class="w-full py-2.5 px-4 bg-[#0284C7] hover:bg-sky-700 text-white font-semibold text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="log-in" class="w-4 h-4"></i>
+                    <span>${state.loading ? 'Memeriksa Akun...' : 'Masuk sebagai Petugas'}</span>
+                  </button>
+                </form>
+              `}
+
+              ${IS_PREVIEW ? `
+                <div class="mt-5 p-3.5 rounded-xl bg-amber-50 border border-amber-200/80 text-xs text-amber-900 space-y-1">
+                  <div class="font-bold flex items-center gap-1.5 text-amber-800">
+                    <i data-lucide="info" class="w-3.5 h-3.5"></i>
+                    <span>Info Akun Demo (Mode Preview)</span>
+                  </div>
+                  <p>• <b>Admin:</b> <code class="bg-white px-1.5 py-0.5 rounded border">admin@sekolah.sch.id</code> / <code class="bg-white px-1.5 py-0.5 rounded border">admin123</code></p>
+                  <p>• <b>Petugas:</b> <code class="bg-white px-1.5 py-0.5 rounded border">petugas1</code> / <code class="bg-white px-1.5 py-0.5 rounded border">123</code></p>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // KOMPONEN UI: SIDEBAR & MOBILE FLOATING NAV
+    // =========================================================================
+    function renderNavigation() {
+      const menus = [
+        { id: 'dashboard', label: 'Dashboard', shortLabel: 'Home', icon: 'layout-dashboard' },
+        { id: 'barang', label: 'Data Barang', shortLabel: 'Barang', icon: 'package' },
+        { id: 'pinjaman', label: 'Data Pinjaman', shortLabel: 'Pinjam', icon: 'hand-helping' },
+        { id: 'ruangan', label: 'Ruangan Barang', shortLabel: 'Ruang', icon: 'building-2' },
+        { id: 'sumber', label: 'Sumber Barang', shortLabel: 'Sumber', icon: 'layers' },
+        { id: 'pengaturan', label: 'Pengaturan', shortLabel: 'Setting', icon: 'settings' },
+      ];
+
+      const sidebarHtml = `
+        <aside class="desktop-sidebar flex-col bg-[#333A7B] text-white shadow-xl select-none">
+          <!-- Brand Logo / Badge -->
+          <div class="p-6 flex flex-col items-center text-center border-b border-white/10">
+            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-amber-500 via-yellow-300 to-amber-600 p-1 shadow-lg mb-3">
+              <div class="w-full h-full rounded-full bg-[#242959] flex flex-col items-center justify-center border-2 border-amber-200/70">
+                ${state.identitas.logoUrl
+                  ? `<img src="${escapeHtml(state.identitas.logoUrl)}" alt="Logo" class="w-12 h-12 object-contain rounded-full" />`
+                  : `<i data-lucide="shield-check" class="w-7 h-7 text-amber-300 mb-0.5"></i>
+                     <span class="text-[10px] font-extrabold tracking-widest text-amber-200">E-INVENT</span>`
+                }
+              </div>
+            </div>
+            <p class="text-sm font-semibold text-white tracking-wide">Hello! ${escapeHtml(state.currentUser.name.split(' ')[0])}</p>
+            <span class="mt-1 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-full bg-white/15 text-indigo-100">
+              ${state.currentUser.role === 'admin' ? 'Administrator' : 'Petugas Sarpras'}
+            </span>
+          </div>
+
+          <!-- Menu Items -->
+          <nav class="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
+            ${menus.map(m => {
+              const active = state.activeMenu === m.id;
+              return `
+                <button type="button" data-action="nav" data-menu="${m.id}"
+                  class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                    active
+                      ? 'bg-white text-[#333A7B] font-bold shadow-sm'
+                      : 'text-indigo-100 hover:bg-white/10 hover:text-white'
+                  }">
+                  <i data-lucide="${m.icon}" class="w-4 h-4 ${active ? 'text-[#FF0066]' : 'text-indigo-300'}"></i>
+                  <span>${m.label}</span>
+                </button>
+              `;
+            }).join('')}
+          </nav>
+
+          <!-- Logout -->
+          <div class="p-4 border-t border-white/10">
+            <button type="button" data-action="logout"
+              class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold text-rose-400 hover:bg-rose-500/15 hover:text-rose-300 transition-all">
+              <i data-lucide="log-out" class="w-4 h-4"></i>
+              <span>Logout</span>
+            </button>
+          </div>
+        </aside>
+      `;
+
+      const mobileNavHtml = `
+        <nav class="mobile-bottom-nav fixed bottom-3 left-3 right-3 z-50 glass-nav-mobile rounded-2xl shadow-2xl border border-white/15 px-2 py-2 justify-around items-center no-print">
+          ${menus.map(m => {
+            const active = state.activeMenu === m.id;
+            return `
+              <button type="button" data-action="nav" data-menu="${m.id}"
+                class="flex flex-col items-center justify-center py-1.5 px-2 rounded-xl transition-all ${
+                  active ? 'bg-white text-[#333A7B] shadow-sm scale-105' : 'text-indigo-200 hover:text-white'
+                }">
+                <i data-lucide="${m.icon}" class="w-4 h-4 ${active ? 'text-[#FF0066]' : ''}"></i>
+                <span class="text-[10px] font-semibold mt-0.5">${m.shortLabel}</span>
+              </button>
+            `;
+          }).join('')}
+          <button type="button" data-action="logout"
+            class="flex flex-col items-center justify-center py-1.5 px-2 rounded-xl text-rose-300 hover:text-rose-200">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
+            <span class="text-[10px] font-semibold mt-0.5">Keluar</span>
+          </button>
+        </nav>
+      `;
+
+      return sidebarHtml + mobileNavHtml;
+    }
+
+    // =========================================================================
+    // KOMPONEN UI: TOP HEADER BAR
+    // =========================================================================
+    function renderTopHeader() {
+      return `
+        <header class="bg-white rounded-xl shadow-sm border border-slate-200/70 px-4 sm:px-6 py-3.5 mb-5 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-[#333A7B]">
+              <i data-lucide="more-vertical" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h1 class="text-sm sm:text-base font-bold text-[#1E3A8A] uppercase tracking-wide">
+                ${escapeHtml(state.identitas.namaSekolah)}
+              </h1>
+              ${IS_PREVIEW ? `
+                <span class="inline-flex items-center gap-1 text-[10px] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                  Mode Preview (Data Simulasi In-Memory)
+                </span>
+              ` : ''}
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4 ml-auto">
+            <span class="text-xs sm:text-sm font-medium text-[#0284C7]">${formatTanggalIndonesia()}</span>
+            <div class="w-8 h-8 rounded-lg bg-sky-100 border border-sky-200 flex items-center justify-center text-[#0284C7]" title="${escapeHtml(state.currentUser.name)}">
+              <i data-lucide="user" class="w-4 h-4"></i>
+            </div>
+          </div>
+        </header>
+      `;
+    }
+
+    // =========================================================================
+    // VIEW 1: DASHBOARD (SESUAI REFERENSI GAMBAR)
+    // =========================================================================
+    function renderDashboardView() {
+      const stats = getDashboardStats();
+
+      return `
+        <!-- 4 Kartu KPI -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-5">
+          <!-- KPI 1: Barang -->
+          <div data-action="nav" data-menu="barang" class="cursor-pointer bg-white rounded-xl shadow-sm border border-slate-200/70 border-l-4 border-l-[#FF0066] p-4 flex items-center justify-between hover:-translate-y-0.5 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-rose-50 flex items-center justify-center text-[#FF0066]">
+              <i data-lucide="package" class="w-7 h-7"></i>
+            </div>
+            <div class="h-10 w-px bg-slate-200"></div>
+            <div class="text-right pr-2">
+              <p class="text-xs font-medium text-[#0284C7]">Barang</p>
+              <p class="text-2xl font-extrabold text-[#1E3A8A] mt-0.5">${stats.totalUnitBarang}</p>
+            </div>
+          </div>
+
+          <!-- KPI 2: Ruangan -->
+          <div data-action="nav" data-menu="ruangan" class="cursor-pointer bg-white rounded-xl shadow-sm border border-slate-200/70 border-l-4 border-l-[#0EA5E9] p-4 flex items-center justify-between hover:-translate-y-0.5 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-sky-50 flex items-center justify-center text-[#0EA5E9]">
+              <i data-lucide="school" class="w-7 h-7"></i>
+            </div>
+            <div class="h-10 w-px bg-slate-200"></div>
+            <div class="text-right pr-2">
+              <p class="text-xs font-medium text-[#0284C7]">Ruangan</p>
+              <p class="text-2xl font-extrabold text-[#1E3A8A] mt-0.5">${stats.totalRuangan}</p>
+            </div>
+          </div>
+
+          <!-- KPI 3: Pinjaman -->
+          <div data-action="nav" data-menu="pinjaman" class="cursor-pointer bg-white rounded-xl shadow-sm border border-slate-200/70 border-l-4 border-l-[#F59E0B] p-4 flex items-center justify-between hover:-translate-y-0.5 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-[#F59E0B]">
+              <i data-lucide="hand-helping" class="w-7 h-7"></i>
+            </div>
+            <div class="h-10 w-px bg-slate-200"></div>
+            <div class="text-right pr-2">
+              <p class="text-xs font-medium text-[#0284C7]">Pinjaman</p>
+              <p class="text-2xl font-extrabold text-[#1E3A8A] mt-0.5">${stats.totalTransaksiPinjam}</p>
+            </div>
+          </div>
+
+          <!-- KPI 4: Sumber -->
+          <div data-action="nav" data-menu="sumber" class="cursor-pointer bg-white rounded-xl shadow-sm border border-slate-200/70 border-l-4 border-l-[#00C853] p-4 flex items-center justify-between hover:-translate-y-0.5 transition-all">
+            <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-[#00C853]">
+              <i data-lucide="bar-chart-3" class="w-7 h-7"></i>
+            </div>
+            <div class="h-10 w-px bg-slate-200"></div>
+            <div class="text-right pr-2">
+              <p class="text-xs font-medium text-[#0284C7]">Sumber</p>
+              <p class="text-2xl font-extrabold text-[#1E3A8A] mt-0.5">${stats.totalSumber}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid Konten Utama (2 Kolom) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          <!-- Kolom Kiri (7 kolom di desktop): Identitas Pendidikan & Log Aktivitas -->
+          <div class="lg:col-span-7 space-y-5">
+            <!-- Card Identitas Pendidikan -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200/70 p-5">
+              <div class="flex items-center justify-between mb-4">
+                <h2 class="text-sm font-bold text-[#1E3A8A]">Identitas Pendidikan</h2>
+                <div class="flex items-center gap-1.5">
+                  <button type="button" data-action="nav" data-menu="pengaturan" title="Edit Identitas Pendidikan"
+                    class="p-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-[#0284C7] border border-sky-200 transition-colors">
+                    <i data-lucide="save" class="w-4 h-4"></i>
+                  </button>
+                  <button type="button" data-action="print" title="Cetak Ringkasan"
+                    class="p-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-[#0284C7] border border-sky-200 transition-colors">
+                    <i data-lucide="printer" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="rounded-lg overflow-hidden border border-slate-100 text-xs sm:text-sm">
+                <div class="grid grid-cols-12 bg-[#F1F3F5] px-4 py-3">
+                  <div class="col-span-4 text-slate-600 font-medium">Jenjang</div>
+                  <div class="col-span-1 text-[#0284C7] font-bold">:</div>
+                  <div class="col-span-7 text-slate-800 font-semibold">${escapeHtml(state.identitas.jenjang)}</div>
+                </div>
+                <div class="grid grid-cols-12 bg-white px-4 py-3">
+                  <div class="col-span-4 text-slate-600 font-medium">Kepala Sekolah</div>
+                  <div class="col-span-1 text-[#0284C7] font-bold">:</div>
+                  <div class="col-span-7 text-slate-800 font-semibold">${escapeHtml(state.identitas.kepalaSekolah)}</div>
+                </div>
+                <div class="grid grid-cols-12 bg-[#F1F3F5] px-4 py-3">
+                  <div class="col-span-4 text-slate-600 font-medium">Tahun Pelajaran</div>
+                  <div class="col-span-1 text-[#0284C7] font-bold">:</div>
+                  <div class="col-span-7 text-slate-800 font-semibold">${escapeHtml(state.identitas.tahunPelajaran)}</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Log dan Aktifitas -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200/70 p-5">
+              <div class="flex items-center justify-between mb-4">
+                <h2 class="text-sm font-bold text-[#1E3A8A]">Log dan Aktifitas</h2>
+                <button type="button" data-action="open-modal" data-modal-type="logs"
+                  class="px-4 py-1.5 rounded-full bg-[#00C853] hover:bg-emerald-600 text-white text-xs font-semibold shadow-sm transition-colors">
+                  View Log
+                </button>
+              </div>
+
+              ${state.logs.length === 0 ? `
+                <div class="py-8 text-center text-xs text-slate-400">
+                  Belum ada catatan aktivitas sistem.
+                </div>
+              ` : `
+                <div class="divide-y divide-slate-200">
+                  ${state.logs.slice(0, 5).map(log => `
+                    <div class="py-3 flex items-start gap-3">
+                      <div class="mt-0.5 w-6 h-6 rounded bg-emerald-100 text-[#00C853] flex items-center justify-center shrink-0">
+                        <i data-lucide="message-square-text" class="w-3.5 h-3.5"></i>
+                      </div>
+                      <div class="flex-1 min-w-0">
+                        <p class="text-xs sm:text-sm font-medium text-[#1E3A8A] truncate">${escapeHtml(log.aktivitas)}</p>
+                        <p class="text-[11px] text-slate-500 mt-0.5">Oleh ${escapeHtml(log.user)} • ${escapeHtml(log.timestamp)}</p>
+                      </div>
+                    </div>
+                  `).join('')}
+                  <div class="pt-3 flex items-center gap-3">
+                    <div class="w-6 h-6 rounded bg-emerald-100 text-[#00C853] flex items-center justify-center shrink-0">
+                      <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                    </div>
+                    <p class="text-xs font-semibold text-rose-600">
+                      ${IS_PREVIEW ? 'Anda Menggunakan Mode Simulasi (Preview)' : 'Terhubung Real-time dengan Firebase Firestore'}
+                    </p>
+                  </div>
+                </div>
+              `}
+            </div>
+          </div>
+
+          <!-- Kolom Kanan (5 kolom di desktop): Grafik Rekapitulasi, Status & Kondisi Barang -->
+          <div class="lg:col-span-5 space-y-5">
+            <!-- Card Rekapitulasi & Status -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200/70 p-5">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Rekapitulasi</h3>
+                  <div class="h-44">
+                    <canvas id="chart-rekapitulasi"></canvas>
+                  </div>
+                </div>
+                <div>
+                  <h3 class="text-xs font-bold text-slate-700 text-center uppercase tracking-wider mb-3">Status Unit</h3>
+                  <div class="h-44">
+                    <canvas id="chart-status"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Kondisi Barang -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200/70 p-5">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-sm font-bold text-slate-800">Kondisi Barang</h3>
+                <span class="text-[11px] font-semibold text-slate-500">Total: ${stats.totalUnitBarang} Unit</span>
+              </div>
+              <div class="grid grid-cols-12 gap-3 items-center">
+                <div class="col-span-8 h-44">
+                  <canvas id="chart-kondisi"></canvas>
+                </div>
+                <div class="col-span-4 flex flex-col items-center justify-center text-center p-2 bg-slate-50 rounded-xl border border-slate-100">
+                  <div class="w-16 h-16 rounded-full bg-sky-100 text-[#1E3A8A] flex items-center justify-center mb-2 shadow-inner">
+                    <i data-lucide="award" class="w-9 h-9 text-[#0284C7]"></i>
+                  </div>
+                  <p class="text-[10px] font-bold text-[#1E3A8A] leading-tight">STANDAR SARPRAS</p>
+                  <p class="text-[9px] text-slate-500 mt-0.5">Terverifikasi</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // VIEW 2: DATA BARANG
+    // =========================================================================
+    function renderBarangView() {
+      const filtered = state.barang.filter(item => {
+        const matchSearch = (item.namaBarang || '').toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+                            (item.kodeBarang || '').toLowerCase().includes(state.searchQuery.toLowerCase());
+        const matchKondisi = state.filterKondisi === 'all' || item.kondisi === state.filterKondisi;
+        const matchRuang = state.filterRuangan === 'all' || item.ruanganId === state.filterRuangan;
+        return matchSearch && matchKondisi && matchRuang;
+      });
+
+      const badgeKondisi = (k) => {
+        if (k === 'Baik') return 'bg-emerald-100 text-emerald-700 border-emerald-200';
+        if (k === 'Rusak Ringan') return 'bg-amber-100 text-amber-700 border-amber-200';
+        if (k === 'Rusak Menengah') return 'bg-orange-100 text-orange-700 border-orange-200';
+        return 'bg-rose-100 text-rose-700 border-rose-200';
+      };
+
+      return `
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200/70 p-5">
+          <!-- Header & Action -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+            <div>
+              <h2 class="text-base font-bold text-[#1E3A8A]">Data Inventaris Barang</h2>
+              <p class="text-xs text-slate-500">Kelola daftar aset, kondisi fisik, lokasi ruangan, sumber perolehan, bukti BAST, dan cetak label.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 no-print">
+              <button type="button" data-action="open-modal" data-modal-type="cetak-label" data-label-mode="all"
+                class="px-3 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-[#333A7B] border border-indigo-200 text-xs font-semibold flex items-center gap-1.5 transition-colors">
+                <i data-lucide="tag" class="w-4 h-4"></i>
+                <span>Cetak Semua Label</span>
+              </button>
+              <button type="button" data-action="export-excel" data-modul="barang"
+                class="px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-semibold flex items-center gap-1.5 transition-colors">
+                <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
+                <span>Export Excel</span>
+              </button>
+              <button type="button" data-action="open-modal" data-modal-type="import-excel" data-modul="barang"
+                class="px-3 py-2 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 text-xs font-semibold flex items-center gap-1.5 transition-colors">
+                <i data-lucide="upload" class="w-4 h-4"></i>
+                <span>Import Excel</span>
+              </button>
+              <button type="button" data-action="print"
+                class="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold flex items-center gap-1.5 transition-colors">
+                <i data-lucide="printer" class="w-4 h-4"></i>
+                <span>Cetak Laporan</span>
+              </button>
+              <button type="button" data-action="open-modal" data-modal-type="barang" data-mode="add"
+                class="px-4 py-2 rounded-xl bg-[#FF0066] hover:bg-rose-600 text-white text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-colors">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+                <span>Tambah Barang</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Filter Bar -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5 no-print">
+            <div class="relative">
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-2.5"></i>
+              <input type="text" id="input-search-barang" value="${escapeHtml(state.searchQuery)}" placeholder="Cari kode / nama barang..."
+                class="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#333A7B]" />
+            </div>
+            <select id="select-filter-kondisi" class="px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#333A7B]">
+              <option value="all" ${state.filterKondisi === 'all' ? 'selected' : ''}>Semua Kondisi</option>
+              <option value="Baik" ${state.filterKondisi === 'Baik' ? 'selected' : ''}>Baik</option>
+              <option value="Rusak Ringan" ${state.filterKondisi === 'Rusak Ringan' ? 'selected' : ''}>Rusak Ringan</option>
+              <option value="Rusak Menengah" ${state.filterKondisi === 'Rusak Menengah' ? 'selected' : ''}>Rusak Menengah</option>
+              <option value="Rusak Berat" ${state.filterKondisi === 'Rusak Berat' ? 'selected' : ''}>Rusak Berat</option>
+            </select>
+            <select id="select-filter-ruangan" class="px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#333A7B]">
+              <option value="all" ${state.filterRuangan === 'all' ? 'selected' : ''}>Semua Ruangan</option>
+              ${state.ruangan.map(r => `
+                <option value="${r.id}" ${state.filterRuangan === r.id ? 'selected' : ''}>${escapeHtml(r.namaRuang)}</option>
+              `).join('')}
+            </select>
+          </div>
+
+          <!-- Tabel Data -->
+          ${filtered.length === 0 ? `
+            <div class="py-12 text-center border-2 border-dashed border-slate-200 rounded-xl">
+              <i data-lucide="package-open" class="w-10 h-10 text-slate-300 mx-auto mb-2"></i>
+              <p class="text-sm font-semibold text-slate-600">Belum ada data barang</p>
+              <p class="text-xs text-slate-400 mt-1">Klik tombol "Tambah Barang" untuk mulai mencatat inventaris.</p>
+            </div>
+          ` : `
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="bg-[#333A7B] text-white">
+                    <th class="py-3 px-4 font-semibold">Kode</th>
+                    <th class="py-3 px-4 font-semibold">Nama Barang</th>
+                    <th class="py-3 px-4 font-semibold">Ruangan</th>
+                    <th class="py-3 px-4 font-semibold">Sumber</th>
+                    <th class="py-3 px-4 font-semibold text-center">Jumlah</th>
+                    <th class="py-3 px-4 font-semibold">Kondisi</th>
+                    <th class="py-3 px-4 font-semibold">Tahun</th>
+                    <th class="py-3 px-4 font-semibold text-center">Bukti BAST</th>
+                    <th class="py-3 px-4 font-semibold text-right no-print">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                  ${filtered.map((b, idx) => `
+                    <tr class="${idx % 2 === 1 ? 'bg-slate-50/70' : 'bg-white'} hover:bg-indigo-50/40 transition-colors">
+                      <td class="py-3 px-4 font-mono font-semibold text-[#1E3A8A]">${escapeHtml(b.kodeBarang)}</td>
+                      <td class="py-3 px-4">
+                        <p class="font-bold text-slate-800">${escapeHtml(b.namaBarang)}</p>
+                        ${b.keterangan ? `<p class="text-[11px] text-slate-400">${escapeHtml(b.keterangan)}</p>` : ''}
+                      </td>
+                      <td class="py-3 px-4 text-slate-600">${escapeHtml(b.namaRuangan || '-')}</td>
+                      <td class="py-3 px-4 text-slate-600">${escapeHtml(b.namaSumber || '-')}</td>
+                      <td class="py-3 px-4 text-center font-bold text-slate-800">${escapeHtml(b.jumlah)}</td>
+                      <td class="py-3 px-4">
+                        <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold border ${badgeKondisi(b.kondisi)}">
+                          ${escapeHtml(b.kondisi)}
+                        </span>
+                      </td>
+                      <td class="py-3 px-4 text-slate-600">${escapeHtml(b.tahunPerolehan || '-')}</td>
+                      <td class="py-3 px-4 text-center whitespace-nowrap">
+                        ${b.bastUrl ? `
+                          <a href="${escapeHtml(b.bastUrl)}" target="_blank" rel="noopener noreferrer"
+                            ${b.bastUrl.startsWith('data:') ? `download="${escapeHtml(b.bastNama || 'Bukti_BAST')}"` : ''}
+                            class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-[#333A7B] border border-indigo-200 text-[11px] font-semibold transition-colors"
+                            title="${escapeHtml(b.bastNama || 'Buka Dokumen BAST')}">
+                            <i data-lucide="file-check-2" class="w-3.5 h-3.5 text-emerald-600"></i>
+                            <span>Lihat BAST</span>
+                          </a>
+                        ` : `
+                          <button type="button" data-action="open-modal" data-modal-type="barang" data-mode="edit" data-id="${b.id}"
+                            class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 text-[11px] font-medium transition-colors"
+                            title="Upload atau tempel link BAST">
+                            <i data-lucide="upload-cloud" class="w-3 h-3"></i>
+                            <span>Upload BAST</span>
+                          </button>
+                        `}
+                      </td>
+                      <td class="py-3 px-4 text-right space-x-1 no-print whitespace-nowrap">
+                        <button type="button" data-action="open-modal" data-modal-type="cetak-label" data-label-mode="single" data-id="${b.id}"
+                          class="p-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-[#333A7B] transition-colors" title="Cetak Label Barang">
+                          <i data-lucide="tag" class="w-3.5 h-3.5"></i>
+                        </button>
+                        <button type="button" data-action="open-modal" data-modal-type="barang" data-mode="edit" data-id="${b.id}"
+                          class="p-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-600 transition-colors" title="Edit">
+                          <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                        </button>
+                        ${state.currentUser.role === 'admin' ? `
+                          <button type="button" data-action="confirm-delete" data-col="barang" data-id="${b.id}" data-label="${escapeHtml(b.namaBarang)}"
+                            class="p-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 transition-colors" title="Hapus">
+                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                          </button>
+                        ` : ''}
+                      </td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          `}
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // VIEW 3: DATA PINJAMAN
+    // =========================================================================
+    function renderPinjamanView() {
+      return `
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200/70 p-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+            <div>
+              <h2 class="text-base font-bold text-[#1E3A8A]">Data Peminjaman & Pengembalian</h2>
+              <p class="text-xs text-slate-500">Catat sirkulasi peminjaman barang inventaris oleh guru, siswa, atau kegiatan sekolah.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 no-print">
+              <button type="button" data-action="export-excel" data-modul="pinjaman"
+                class="px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-semibold flex items-center gap-1.5 transition-colors">
+                <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
+                <span>Export Excel</span>
+              </button>
+              <button type="button" data-action="open-modal" data-modal-type="import-excel" data-modul="pinjaman"
+                class="px-3 py-2 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 text-xs font-semibold flex items-center gap-1.5 transition-colors">
+                <i data-lucide="upload" class="w-4 h-4"></i>
+                <span>Import Excel</span>
+              </button>
+              <button type="button" data-action="open-modal" data-modal-type="pinjaman" data-mode="add"
+                class="px-4 py-2 rounded-xl bg-[#F59E0B] hover:bg-amber-600 text-white text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-colors">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+                <span>Catat Pinjaman</span>
+              </button>
+            </div>
+          </div>
+
+          ${state.pinjaman.length === 0 ? `
+            <div class="py-12 text-center border-2 border-dashed border-slate-200 rounded-xl">
+              <i data-lucide="hand-helping" class="w-10 h-10 text-slate-300 mx-auto mb-2"></i>
+              <p class="text-sm font-semibold text-slate-600">Belum ada transaksi peminjaman</p>
+              <p class="text-xs text-slate-400 mt-1">Klik "Catat Pinjaman" untuk menambahkan transaksi baru.</p>
+            </div>
+          ` : `
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="bg-[#333A7B] text-white">
+                    <th class="py-3 px-4 font-semibold">Kode</th>
+                    <th class="py-3 px-4 font-semibold">Peminjam / Unit</th>
+                    <th class="py-3 px-4 font-semibold">Barang Dipinjam</th>
+                    <th class="py-3 px-4 font-semibold text-center">Jml</th>
+                    <th class="py-3 px-4 font-semibold">Tgl Pinjam</th>
+                    <th class="py-3 px-4 font-semibold">Tgl Kembali</th>
+                    <th class="py-3 px-4 font-semibold">Status</th>
+                    <th class="py-3 px-4 font-semibold text-right">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                  ${state.pinjaman.map((p, idx) => `
+                    <tr class="${idx % 2 === 1 ? 'bg-slate-50/70' : 'bg-white'} hover:bg-amber-50/30">
+                      <td class="py-3 px-4 font-mono font-semibold text-[#1E3A8A]">${escapeHtml(p.kodePinjam)}</td>
+                      <td class="py-3 px-4 font-bold text-slate-800">${escapeHtml(p.peminjam)}</td>
+                      <td class="py-3 px-4">
+                        <p class="font-medium text-slate-700">${escapeHtml(p.namaBarang)}</p>
+                        ${p.catatan ? `<p class="text-[11px] text-slate-400">${escapeHtml(p.catatan)}</p>` : ''}
+                      </td>
+                      <td class="py-3 px-4 text-center font-bold">${escapeHtml(p.jumlah)}</td>
+                      <td class="py-3 px-4 text-slate-600">${escapeHtml(p.tglPinjam)}</td>
+                      <td class="py-3 px-4 text-slate-600">${escapeHtml(p.tglKembali || '-')}</td>
+                      <td class="py-3 px-4">
+                        <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold ${
+                          p.status === 'Dipinjam'
+                            ? 'bg-amber-100 text-amber-800 border border-amber-200'
+                            : 'bg-emerald-100 text-emerald-700 border border-emerald-200'
+                        }">
+                          ${escapeHtml(p.status)}
+                        </span>
+                      </td>
+                      <td class="py-3 px-4 text-right space-x-1 whitespace-nowrap">
+                        <button type="button" data-action="toggle-pinjam" data-id="${p.id}"
+                          class="px-2.5 py-1 rounded-lg text-[11px] font-semibold ${
+                            p.status === 'Dipinjam'
+                              ? 'bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200'
+                              : 'bg-slate-100 hover:bg-slate-200 text-slate-600'
+                          }">
+                          ${p.status === 'Dipinjam' ? 'Tandai Kembali' : 'Batalkan Kembali'}
+                        </button>
+                        ${state.currentUser.role === 'admin' ? `
+                          <button type="button" data-action="confirm-delete" data-col="pinjaman" data-id="${p.id}" data-label="${escapeHtml(p.kodePinjam)}"
+                            class="p-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600" title="Hapus">
+                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                          </button>
+                        ` : ''}
+                      </td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          `}
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // VIEW 4: RUANGAN BARANG
+    // =========================================================================
+    function renderRuanganView() {
+      return `
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200/70 p-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+            <div>
+              <h2 class="text-base font-bold text-[#1E3A8A]">Master Ruangan Barang</h2>
+              <p class="text-xs text-slate-500">Daftar ruangan penyimpanan atau penempatan aset inventaris.</p>
+            </div>
+            <button type="button" data-action="open-modal" data-modal-type="ruangan" data-mode="add"
+              class="px-4 py-2 rounded-xl bg-[#0EA5E9] hover:bg-sky-600 text-white text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-colors self-start sm:self-auto">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+              <span>Tambah Ruangan</span>
+            </button>
+          </div>
+
+          ${state.ruangan.length === 0 ? `
+            <div class="py-12 text-center border-2 border-dashed border-slate-200 rounded-xl">
+              <i data-lucide="building-2" class="w-10 h-10 text-slate-300 mx-auto mb-2"></i>
+              <p class="text-sm font-semibold text-slate-600">Belum ada data ruangan</p>
+            </div>
+          ` : `
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              ${state.ruangan.map(r => {
+                const jmlBarangDiRuang = state.barang
+                  .filter(b => b.ruanganId === r.id)
+                  .reduce((acc, b) => acc + (Number(b.jumlah) || 0), 0);
+
+                return `
+                  <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                      <div class="flex items-center justify-between mb-2">
+                        <span class="px-2.5 py-0.5 rounded-md bg-sky-100 text-[#0284C7] font-mono text-[11px] font-bold">
+                          ${escapeHtml(r.kodeRuang)}
+                        </span>
+                        <span class="text-xs font-bold text-[#1E3A8A]">${jmlBarangDiRuang} Unit Aset</span>
+                      </div>
+                      <h3 class="text-sm font-bold text-slate-800">${escapeHtml(r.namaRuang)}</h3>
+                      <p class="text-xs text-slate-600 mt-1 flex items-center gap-1.5">
+                        <i data-lucide="user-check" class="w-3.5 h-3.5 text-slate-400"></i>
+                        <span>PJ: ${escapeHtml(r.penanggungJawab || '-')}</span>
+                      </p>
+                      ${r.keterangan ? `<p class="text-[11px] text-slate-400 mt-1">${escapeHtml(r.keterangan)}</p>` : ''}
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-200/70 flex justify-end gap-1.5">
+                      <button type="button" data-action="open-modal" data-modal-type="ruangan" data-mode="edit" data-id="${r.id}"
+                        class="px-3 py-1 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-700 text-xs font-semibold">Edit</button>
+                      ${state.currentUser.role === 'admin' ? `
+                        <button type="button" data-action="confirm-delete" data-col="ruangan" data-id="${r.id}" data-label="${escapeHtml(r.namaRuang)}"
+                          class="px-3 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-semibold">Hapus</button>
+                      ` : ''}
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          `}
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // VIEW 5: SUMBER BARANG
+    // =========================================================================
+    function renderSumberView() {
+      return `
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200/70 p-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+            <div>
+              <h2 class="text-base font-bold text-[#1E3A8A]">Master Sumber Perolehan Barang</h2>
+              <p class="text-xs text-slate-500">Kategori sumber dana atau asal perolehan barang (BOS, Hibah, Komite, APBD, dll).</p>
+            </div>
+            <button type="button" data-action="open-modal" data-modal-type="sumber" data-mode="add"
+              class="px-4 py-2 rounded-xl bg-[#00C853] hover:bg-emerald-600 text-white text-xs font-semibold shadow-sm flex items-center gap-1.5 transition-colors self-start sm:self-auto">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+              <span>Tambah Sumber</span>
+            </button>
+          </div>
+
+          ${state.sumber.length === 0 ? `
+            <div class="py-12 text-center border-2 border-dashed border-slate-200 rounded-xl">
+              <i data-lucide="layers" class="w-10 h-10 text-slate-300 mx-auto mb-2"></i>
+              <p class="text-sm font-semibold text-slate-600">Belum ada data sumber barang</p>
+            </div>
+          ` : `
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="bg-[#333A7B] text-white">
+                    <th class="py-3 px-4 font-semibold">Kode Sumber</th>
+                    <th class="py-3 px-4 font-semibold">Nama Sumber Barang</th>
+                    <th class="py-3 px-4 font-semibold">Keterangan</th>
+                    <th class="py-3 px-4 font-semibold text-center">Total Unit</th>
+                    <th class="py-3 px-4 font-semibold text-right">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                  ${state.sumber.map((s, idx) => {
+                    const totalUnit = state.barang
+                      .filter(b => b.sumberId === s.id)
+                      .reduce((acc, b) => acc + (Number(b.jumlah) || 0), 0);
+
+                    return `
+                      <tr class="${idx % 2 === 1 ? 'bg-slate-50/70' : 'bg-white'}">
+                        <td class="py-3 px-4 font-mono font-bold text-emerald-700">${escapeHtml(s.kodeSumber)}</td>
+                        <td class="py-3 px-4 font-bold text-slate-800">${escapeHtml(s.namaSumber)}</td>
+                        <td class="py-3 px-4 text-slate-600">${escapeHtml(s.keterangan || '-')}</td>
+                        <td class="py-3 px-4 text-center font-bold text-[#1E3A8A]">${totalUnit}</td>
+                        <td class="py-3 px-4 text-right space-x-1">
+                          <button type="button" data-action="open-modal" data-modal-type="sumber" data-mode="edit" data-id="${s.id}"
+                            class="p-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-600" title="Edit">
+                            <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                          </button>
+                          ${state.currentUser.role === 'admin' ? `
+                            <button type="button" data-action="confirm-delete" data-col="sumber" data-id="${s.id}" data-label="${escapeHtml(s.namaSumber)}"
+                              class="p-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600" title="Hapus">
+                              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                            </button>
+                          ` : ''}
+                        </td>
+                      </tr>
+                    `;
+                  }).join('')}
+                </tbody>
+              </table>
+            </div>
+          `}
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // VIEW 6: PENGATURAN (IDENTITAS PENDIDIKAN & MANAJEMEN AKUN PETUGAS)
+    // =========================================================================
+    function renderPengaturanView() {
+      const isAdmin = state.currentUser.role === 'admin';
+
+      return `
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          <!-- Form Identitas Pendidikan -->
+          <div class="lg:col-span-6 bg-white rounded-xl shadow-sm border border-slate-200/70 p-5">
+            <h2 class="text-base font-bold text-[#1E3A8A] mb-1">Identitas Pendidikan / Instansi</h2>
+            <p class="text-xs text-slate-500 mb-4">Informasi ini akan tampil di header, kartu profil dashboard, dan label barang.</p>
+
+            <form id="form-identitas" class="space-y-3.5 text-xs">
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Nama Sekolah / Instansi</label>
+                <input type="text" name="namaSekolah" required value="${escapeHtml(state.identitas.namaSekolah)}"
+                  ${!isAdmin ? 'disabled' : ''}
+                  class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#333A7B]" />
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Jenjang</label>
+                  <input type="text" name="jenjang" required value="${escapeHtml(state.identitas.jenjang)}"
+                    ${!isAdmin ? 'disabled' : ''}
+                    class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#333A7B]" />
+                </div>
+                <div>
+                  <label class="block font-semibold text-slate-700 mb-1">Tahun Pelajaran</label>
+                  <input type="text" name="tahunPelajaran" required value="${escapeHtml(state.identitas.tahunPelajaran)}"
+                    ${!isAdmin ? 'disabled' : ''}
+                    class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#333A7B]" />
+                </div>
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Nama Kepala Sekolah</label>
+                <input type="text" name="kepalaSekolah" required value="${escapeHtml(state.identitas.kepalaSekolah)}"
+                  ${!isAdmin ? 'disabled' : ''}
+                  class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#333A7B]" />
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">URL Logo Instansi (Opsional)</label>
+                <input type="url" name="logoUrl" placeholder="https://..." value="${escapeHtml(state.identitas.logoUrl || '')}"
+                  ${!isAdmin ? 'disabled' : ''}
+                  class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#333A7B]" />
+              </div>
+
+              ${isAdmin ? `
+                <div class="pt-2">
+                  <button type="submit"
+                    class="px-5 py-2.5 rounded-xl bg-[#333A7B] hover:bg-[#272D63] text-white font-semibold shadow-sm flex items-center gap-2 transition-colors">
+                    <i data-lucide="save" class="w-4 h-4"></i>
+                    <span>Simpan Identitas</span>
+                  </button>
+                </div>
+              ` : `
+                <p class="text-[11px] text-amber-700 bg-amber-50 p-2.5 rounded-lg border border-amber-200">
+                  Hanya Administrator yang dapat mengubah identitas pendidikan.
+                </p>
+              `}
+            </form>
+          </div>
+
+          <!-- Manajemen Akun Petugas / User (Firestore Hybrid Login) -->
+          <div class="lg:col-span-6 bg-white rounded-xl shadow-sm border border-slate-200/70 p-5">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h2 class="text-base font-bold text-[#1E3A8A]">Akun Petugas / User</h2>
+                <p class="text-xs text-slate-500">Akun login non-admin yang divalidasi melalui database Firestore.</p>
+              </div>
+              ${isAdmin ? `
+                <button type="button" data-action="open-modal" data-modal-type="users" data-mode="add"
+                  class="px-3.5 py-2 rounded-xl bg-[#0284C7] hover:bg-sky-700 text-white text-xs font-semibold flex items-center gap-1.5">
+                  <i data-lucide="user-plus" class="w-4 h-4"></i>
+                  <span>Tambah Akun</span>
+                </button>
+              ` : ''}
+            </div>
+
+            ${state.users.length === 0 ? `
+              <div class="py-10 text-center border-2 border-dashed border-slate-200 rounded-xl">
+                <p class="text-xs font-semibold text-slate-500">Belum ada akun petugas terdaftar.</p>
+              </div>
+            ` : `
+              <div class="space-y-2.5">
+                ${state.users.map(u => `
+                  <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50/70 flex items-center justify-between">
+                    <div>
+                      <p class="text-xs font-bold text-slate-800">${escapeHtml(u.namaLengkap)}</p>
+                      <p class="text-[11px] text-slate-500">Username: <code class="bg-white px-1.5 py-0.5 rounded border">${escapeHtml(u.username)}</code> • ${escapeHtml(u.jabatan || 'Petugas')}</p>
+                    </div>
+                    ${isAdmin ? `
+                      <div class="flex items-center gap-1">
+                        <button type="button" data-action="open-modal" data-modal-type="users" data-mode="edit" data-id="${u.id}"
+                          class="p-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-600">
+                          <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                        </button>
+                        <button type="button" data-action="confirm-delete" data-col="users" data-id="${u.id}" data-label="${escapeHtml(u.namaLengkap)}"
+                          class="p-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600">
+                          <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                        </button>
+                      </div>
+                    ` : ''}
+                  </div>
+                `).join('')}
+              </div>
+            `}
+          </div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // KOMPONEN UI: MODAL FORM, DIALOG KONFIRMASI & CETAK LABEL BARANG
+    // =========================================================================
+    function renderModal() {
+      if (!state.modal) return '';
+      const { type, mode, data, col, id, label } = state.modal;
+
+      let title = '';
+      let bodyHtml = '';
+      let maxWidthClass = 'max-w-lg';
+      let isLabelModal = false;
+
+      if (type === 'cetak-label') {
+        isLabelModal = true;
+        maxWidthClass = 'max-w-4xl';
+        const labelMode = state.modal.labelMode || 'single';
+        const paperSize = state.modal.paperSize || 'A4';
+        const targetItem = data || state.barang[0] || null;
+        const qtyPerItem = Math.max(1, Math.min(100, Number(state.modal.labelQty) || (labelMode === 'single' && targetItem ? Math.min(Number(targetItem.jumlah) || 1, 12) : 1)));
+
+        let itemsToRender = [];
+        if (labelMode === 'single' && targetItem) {
+          for (let i = 1; i <= qtyPerItem; i++) {
+            itemsToRender.push({ ...targetItem, copyNo: i, totalCopy: qtyPerItem });
+          }
+        } else if (labelMode === 'all') {
+          state.barang.forEach(b => {
+            itemsToRender.push({ ...b, copyNo: 1, totalCopy: 1 });
+          });
+        }
+
+        title = labelMode === 'single' && targetItem
+          ? `Cetak Label Barang: ${escapeHtml(targetItem.namaBarang)}`
+          : 'Cetak Semua Label Inventaris Barang';
+
+        const logoHtml = state.identitas.logoUrl
+          ? `<img src="${escapeHtml(state.identitas.logoUrl)}" alt="Logo" class="w-10 h-10 object-contain shrink-0" />`
+          : `<div class="w-10 h-10 rounded-lg bg-[#333A7B] text-white flex flex-col items-center justify-center shrink-0 border border-slate-300">
+               <span class="text-[10px] font-extrabold leading-none tracking-tighter">INV</span>
+               <span class="text-[7px] font-semibold text-amber-300 mt-0.5">ASET</span>
+             </div>`;
+
+        bodyHtml = `
+          <div class="space-y-4">
+            <!-- Kontrol Pengaturan Label (Disembunyikan saat Print) -->
+            <div class="no-print flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+              <div class="flex flex-wrap items-center gap-3">
+                <label class="flex items-center gap-2 font-semibold text-slate-700">
+                  <span>Ukuran Kertas:</span>
+                  <select id="select-label-paper"
+                    class="px-3 py-1.5 bg-white border border-slate-300 rounded-lg font-bold text-[#1E3A8A] focus:outline-none focus:border-[#333A7B]">
+                    <option value="A4" ${paperSize === 'A4' ? 'selected' : ''}>A4 (210 × 297 mm - 3 Kolom)</option>
+                    <option value="Legal" ${paperSize === 'Legal' ? 'selected' : ''}>Legal / F4 (216 × 330 mm - 3 Kolom)</option>
+                  </select>
+                </label>
+
+                ${labelMode === 'single' && targetItem ? `
+                  <label class="flex items-center gap-2 font-semibold text-slate-700">
+                    <span>Jumlah Label:</span>
+                    <input type="number" id="input-label-qty" min="1" max="100" value="${qtyPerItem}"
+                      class="w-20 px-2.5 py-1.5 bg-white border border-slate-300 rounded-lg font-bold text-center text-[#1E3A8A]" />
+                  </label>
+                  <span class="text-[11px] text-slate-400">(Stok: ${targetItem.jumlah} unit)</span>
+                ` : `
+                  <span class="font-semibold text-slate-700">Total ${itemsToRender.length} jenis barang (1 label/jenis).</span>
+                `}
+              </div>
+
+              <div class="flex items-center gap-2">
+                <button type="button" data-action="print-labels"
+                  class="px-4 py-2 rounded-xl bg-[#333A7B] hover:bg-[#272D63] text-white font-semibold shadow-sm flex items-center gap-1.5 transition-colors">
+                  <i data-lucide="printer" class="w-4 h-4"></i>
+                  <span>Print Kertas ${paperSize}</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Area Pratinjau & Cetak Stiker Label -->
+            ${itemsToRender.length === 0 ? `
+              <div class="py-10 text-center text-xs text-slate-400">
+                Belum ada data barang untuk dicetak labelnya.
+              </div>
+            ` : `
+              <div id="label-print-area" class="max-h-[60vh] overflow-y-auto p-3 bg-slate-100/80 rounded-xl border border-slate-200">
+                <div class="mb-2 no-print flex items-center justify-between text-[11px] text-slate-500 px-1">
+                  <span>Pratinjau Layout Kertas <b>${paperSize}</b> (${paperSize === 'Legal' ? '216 × 330 mm' : '210 × 297 mm'}) • Grid 3 Kolom Stiker</span>
+                  <span>${itemsToRender.length} Label</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 print:grid-cols-3 gap-2.5">
+                  ${itemsToRender.map(lbl => `
+                    <div class="label-card-item bg-white border-2 border-slate-800 rounded-lg p-2.5 flex flex-col justify-between shadow-2xs">
+                      <!-- Baris Atas: Logo + Nama Sekolah -->
+                      <div class="flex items-center gap-2 pb-1.5 border-b border-slate-300">
+                        ${logoHtml}
+                        <div class="min-w-0 flex-1">
+                          <p class="text-[8px] font-bold uppercase tracking-wider text-slate-500 leading-none">INVENTARIS MILIK</p>
+                          <p class="text-[10px] font-extrabold text-[#1E3A8A] uppercase leading-tight mt-0.5 line-clamp-2">
+                            ${escapeHtml(state.identitas.namaSekolah)}
+                          </p>
+                        </div>
+                      </div>
+
+                      <!-- Baris Tengah: Kode Barang & Nama Barang -->
+                      <div class="py-1.5 flex items-center justify-between gap-1.5">
+                        <div class="min-w-0 flex-1">
+                          <span class="inline-block px-1.5 py-0.5 bg-slate-900 text-white font-mono text-[10px] font-bold tracking-wider rounded">
+                            ${escapeHtml(lbl.kodeBarang)}
+                          </span>
+                          <p class="text-[11px] font-extrabold text-slate-900 mt-1 leading-snug line-clamp-2">
+                            ${escapeHtml(lbl.namaBarang)}
+                          </p>
+                        </div>
+                        ${lbl.totalCopy > 1 ? `
+                          <div class="text-right shrink-0 border-l border-slate-200 pl-1.5">
+                            <span class="block text-[7px] font-semibold text-slate-400 uppercase">Unit</span>
+                            <span class="text-[11px] font-extrabold text-slate-700">#${lbl.copyNo}</span>
+                          </div>
+                        ` : ''}
+                      </div>
+
+                      <!-- Baris Bawah: Info Ruangan & Tahun -->
+                      <div class="pt-1 border-t border-dashed border-slate-300 flex items-center justify-between text-[8px] font-semibold text-slate-600">
+                        <span class="truncate max-w-[65%]">Ruang: ${escapeHtml(lbl.namaRuangan || '-')}</span>
+                        <span>Thn: ${escapeHtml(lbl.tahunPerolehan || '-')}</span>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            `}
+
+            <div class="no-print flex justify-end">
+              <button type="button" data-action="close-modal" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold">Tutup</button>
+            </div>
+          </div>
+        `;
+      } else if (type === 'confirm-delete') {
+        title = 'Konfirmasi Penghapusan';
+        bodyHtml = `
+          <div class="space-y-4">
+            <div class="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-800 flex items-start gap-2.5">
+              <i data-lucide="alert-triangle" class="w-5 h-5 text-rose-600 shrink-0"></i>
+              <div>
+                <p class="font-bold">Apakah Anda yakin ingin menghapus data ini?</p>
+                <p class="mt-1">Item: <b>${escapeHtml(label)}</b>. Tindakan ini tidak dapat dibatalkan.</p>
+              </div>
+            </div>
+            <div class="flex justify-end gap-2">
+              <button type="button" data-action="close-modal" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold">Batal</button>
+              <button type="button" data-action="execute-delete" data-col="${col}" data-id="${id}" data-label="${escapeHtml(label)}"
+                class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold">Ya, Hapus Permanen</button>
+            </div>
+          </div>
+        `;
+      } else if (type === 'logs') {
+        title = 'Riwayat Lengkap Log & Aktivitas Sistem';
+        bodyHtml = `
+          <div class="max-h-96 overflow-y-auto divide-y divide-slate-200 text-xs">
+            ${state.logs.length === 0 ? '<p class="py-6 text-center text-slate-400">Belum ada log aktivitas.</p>' : state.logs.map(l => `
+              <div class="py-2.5 flex items-start justify-between gap-3">
+                <div>
+                  <p class="font-semibold text-slate-800">${escapeHtml(l.aktivitas)}</p>
+                  <p class="text-[11px] text-slate-500">User: ${escapeHtml(l.user)}</p>
+                </div>
+                <span class="text-[11px] text-slate-400 whitespace-nowrap">${escapeHtml(l.timestamp)}</span>
+              </div>
+            `).join('')}
+          </div>
+          <div class="mt-4 flex justify-end">
+            <button type="button" data-action="close-modal" class="px-4 py-2 rounded-xl bg-[#333A7B] text-white text-xs font-semibold">Tutup</button>
+          </div>
+        `;
+      } else if (type === 'import-excel') {
+        const modulLabel = state.modal.modul === 'pinjaman' ? 'Data Pinjaman' : 'Data Barang';
+        title = `Import Excel - ${modulLabel}`;
+        bodyHtml = `
+          <div class="space-y-4 text-xs">
+            <div class="p-3.5 rounded-xl bg-sky-50 border border-sky-200 text-sky-900 space-y-1.5">
+              <p class="font-bold flex items-center gap-1.5">
+                <i data-lucide="file-spreadsheet" class="w-4 h-4 text-sky-600"></i>
+                <span>Panduan Singkat Import Excel</span>
+              </p>
+              <p>1. Unduh template Excel terlebih dahulu agar nama kolom sesuai sistem.</p>
+              <p>2. Isi data pada baris berikutnya, lalu unggah file <code class="bg-white px-1 rounded border">.xlsx</code> atau <code class="bg-white px-1 rounded border">.xls</code> di bawah ini.</p>
+              <div class="pt-1">
+                <button type="button" data-action="download-template" data-modul="${state.modal.modul}"
+                  class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-sky-100 text-sky-700 font-semibold border border-sky-300 shadow-2xs transition-colors">
+                  <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                  <span>Unduh Template ${modulLabel}.xlsx</span>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1.5">Pilih File Excel (.xlsx / .xls)</label>
+              <input type="file" id="input-import-excel" data-modul="${state.modal.modul}" accept=".xlsx,.xls,.csv"
+                class="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#333A7B] file:text-white hover:file:bg-[#272D63] border border-slate-200 rounded-xl p-1.5 bg-slate-50" />
+            </div>
+
+            <div class="pt-2 flex justify-end">
+              <button type="button" data-action="close-modal" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 font-semibold">Tutup</button>
+            </div>
+          </div>
+        `;
+      } else if (type === 'barang') {
+        const item = data || {};
+        title = mode === 'edit' ? 'Edit Data Barang' : 'Tambah Barang Inventaris';
+        bodyHtml = `
+          <form id="form-modal-barang" data-mode="${mode}" data-id="${item.id || ''}" class="space-y-3 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Kode Barang</label>
+                <input type="text" name="kodeBarang" required placeholder="INV-2026-001" value="${escapeHtml(item.kodeBarang || '')}"
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Tahun Perolehan</label>
+                <input type="number" name="tahunPerolehan" required placeholder="2026" value="${escapeHtml(item.tahunPerolehan || new Date().getFullYear())}"
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+              </div>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Nama Barang / Merk</label>
+              <input type="text" name="namaBarang" required placeholder="Contoh: Laptop Asus Vivobook" value="${escapeHtml(item.namaBarang || '')}"
+                class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Lokasi Ruangan</label>
+                <select name="ruanganId" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl">
+                  <option value="">-- Pilih Ruangan --</option>
+                  ${state.ruangan.map(r => `
+                    <option value="${r.id}" ${item.ruanganId === r.id ? 'selected' : ''}>${escapeHtml(r.namaRuang)}</option>
+                  `).join('')}
+                </select>
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Sumber Perolehan</label>
+                <select name="sumberId" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl">
+                  <option value="">-- Pilih Sumber --</option>
+                  ${state.sumber.map(s => `
+                    <option value="${s.id}" ${item.sumberId === s.id ? 'selected' : ''}>${escapeHtml(s.namaSumber)}</option>
+                  `).join('')}
+                </select>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Jumlah Unit</label>
+                <input type="number" name="jumlah" min="1" required value="${escapeHtml(item.jumlah || 1)}"
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Kondisi Fisik</label>
+                <select name="kondisi" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl">
+                  ${['Baik', 'Rusak Ringan', 'Rusak Menengah', 'Rusak Berat'].map(k => `
+                    <option value="${k}" ${item.kondisi === k ? 'selected' : ''}>${k}</option>
+                  `).join('')}
+                </select>
+              </div>
+            </div>
+
+            <!-- Bukti BAST (Link Drive atau Upload File) -->
+            <div class="p-3 rounded-xl bg-indigo-50/60 border border-indigo-100 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <label class="font-bold text-[#1E3A8A] flex items-center gap-1.5">
+                  <i data-lucide="file-check-2" class="w-3.5 h-3.5 text-emerald-600"></i>
+                  <span>Bukti BAST (Link Google Drive atau Upload Dokumen)</span>
+                </label>
+                ${item.bastUrl ? `<span class="text-[10px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">Terlampir</span>` : ''}
+              </div>
+              <div>
+                <input type="url" name="bastUrl" placeholder="Tempel Link Google Drive BAST (https://drive.google.com/...)"
+                  value="${item.bastUrl && !item.bastUrl.startsWith('data:') ? escapeHtml(item.bastUrl) : ''}"
+                  class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl" />
+              </div>
+              <div class="flex items-center gap-2 text-[11px] text-slate-500">
+                <span class="font-semibold">Atau Upload File (PDF/JPG/PNG, maks 700KB):</span>
+              </div>
+              <input type="file" name="bastFile" accept=".pdf,.jpg,.jpeg,.png"
+                class="w-full text-[11px] text-slate-600 file:mr-2.5 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[11px] file:font-semibold file:bg-[#333A7B] file:text-white bg-white border border-slate-200 rounded-xl p-1" />
+              ${item.bastNama ? `<p class="text-[11px] text-slate-600">File saat ini: <b>${escapeHtml(item.bastNama)}</b></p>` : ''}
+            </div>
+
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Keterangan Tambahan</label>
+              <input type="text" name="keterangan" placeholder="Catatan spesifikasi atau kondisi" value="${escapeHtml(item.keterangan || '')}"
+                class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+            </div>
+            <div class="pt-3 flex justify-end gap-2">
+              <button type="button" data-action="close-modal" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 font-semibold">Batal</button>
+              <button type="submit" class="px-4 py-2 rounded-xl bg-[#FF0066] text-white font-semibold">Simpan Barang</button>
+            </div>
+          </form>
+        `;
+      } else if (type === 'pinjaman') {
+        title = 'Catat Peminjaman Barang';
+        bodyHtml = `
+          <form id="form-modal-pinjaman" class="space-y-3 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Kode Pinjam</label>
+                <input type="text" name="kodePinjam" required value="PJM-${String(state.pinjaman.length + 1).padStart(3, '0')}"
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Nama Peminjam / Unit</label>
+                <input type="text" name="peminjam" required placeholder="Contoh: Guru Mapel IPA / OSIS"
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+              </div>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Pilih Barang</label>
+              <select name="barangId" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl">
+                <option value="">-- Pilih Barang Tersedia --</option>
+                ${state.barang.map(b => `
+                  <option value="${b.id}">${escapeHtml(b.kodeBarang)} - ${escapeHtml(b.namaBarang)} (Stok: ${b.jumlah})</option>
+                `).join('')}
+              </select>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Jumlah Pinjam</label>
+                <input type="number" name="jumlah" min="1" value="1" required
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Tgl Pinjam</label>
+                <input type="date" name="tglPinjam" required value="${new Date().toISOString().split('T')[0]}"
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Rencana Kembali</label>
+                <input type="date" name="tglKembali" required
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+              </div>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Keperluan / Catatan</label>
+              <input type="text" name="catatan" placeholder="Contoh: Kegiatan Ujian Praktik"
+                class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+            </div>
+            <div class="pt-3 flex justify-end gap-2">
+              <button type="button" data-action="close-modal" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 font-semibold">Batal</button>
+              <button type="submit" class="px-4 py-2 rounded-xl bg-[#F59E0B] text-white font-semibold">Simpan Transaksi</button>
+            </div>
+          </form>
+        `;
+      } else if (type === 'ruangan') {
+        const item = data || {};
+        title = mode === 'edit' ? 'Edit Data Ruangan' : 'Tambah Ruangan Baru';
+        bodyHtml = `
+          <form id="form-modal-ruangan" data-mode="${mode}" data-id="${item.id || ''}" class="space-y-3 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Kode Ruangan</label>
+                <input type="text" name="kodeRuang" required placeholder="R-003" value="${escapeHtml(item.kodeRuang || '')}"
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Nama Ruangan</label>
+                <input type="text" name="namaRuang" required placeholder="Lab IPA / Perpustakaan" value="${escapeHtml(item.namaRuang || '')}"
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+              </div>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Penanggung Jawab Ruangan</label>
+              <input type="text" name="penanggungJawab" required placeholder="Nama Guru / Staf PJ" value="${escapeHtml(item.penanggungJawab || '')}"
+                class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Keterangan Lokasi</label>
+              <input type="text" name="keterangan" placeholder="Contoh: Gedung B Lantai 1" value="${escapeHtml(item.keterangan || '')}"
+                class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+            </div>
+            <div class="pt-3 flex justify-end gap-2">
+              <button type="button" data-action="close-modal" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 font-semibold">Batal</button>
+              <button type="submit" class="px-4 py-2 rounded-xl bg-[#0EA5E9] text-white font-semibold">Simpan Ruangan</button>
+            </div>
+          </form>
+        `;
+      } else if (type === 'sumber') {
+        const item = data || {};
+        title = mode === 'edit' ? 'Edit Sumber Barang' : 'Tambah Sumber Barang';
+        bodyHtml = `
+          <form id="form-modal-sumber" data-mode="${mode}" data-id="${item.id || ''}" class="space-y-3 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Kode Sumber</label>
+                <input type="text" name="kodeSumber" required placeholder="SB-03" value="${escapeHtml(item.kodeSumber || '')}"
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Nama Sumber Barang</label>
+                <input type="text" name="namaSumber" required placeholder="Dana BOS / APBD / Hibah" value="${escapeHtml(item.namaSumber || '')}"
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+              </div>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Keterangan</label>
+              <input type="text" name="keterangan" placeholder="Deskripsi singkat sumber anggaran" value="${escapeHtml(item.keterangan || '')}"
+                class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+            </div>
+            <div class="pt-3 flex justify-end gap-2">
+              <button type="button" data-action="close-modal" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 font-semibold">Batal</button>
+              <button type="submit" class="px-4 py-2 rounded-xl bg-[#00C853] text-white font-semibold">Simpan Sumber</button>
+            </div>
+          </form>
+        `;
+      } else if (type === 'users') {
+        const item = data || {};
+        title = mode === 'edit' ? 'Edit Akun Petugas' : 'Tambah Akun Petugas Baru';
+        bodyHtml = `
+          <form id="form-modal-users" data-mode="${mode}" data-id="${item.id || ''}" class="space-y-3 text-xs">
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Nama Lengkap Petugas</label>
+              <input type="text" name="namaLengkap" required placeholder="Nama Lengkap & Gelar" value="${escapeHtml(item.namaLengkap || '')}"
+                class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Username Login</label>
+                <input type="text" name="username" required placeholder="petugas2" value="${escapeHtml(item.username || '')}"
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Password Login</label>
+                <input type="text" name="password" required placeholder="Password akun" value="${escapeHtml(item.password || '')}"
+                  class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+              </div>
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-700 mb-1">Jabatan / Bagian</label>
+              <input type="text" name="jabatan" placeholder="Contoh: Staf Laboratorium" value="${escapeHtml(item.jabatan || '')}"
+                class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl" />
+            </div>
+            <div class="pt-3 flex justify-end gap-2">
+              <button type="button" data-action="close-modal" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 font-semibold">Batal</button>
+              <button type="submit" class="px-4 py-2 rounded-xl bg-[#0284C7] text-white font-semibold">Simpan Akun</button>
+            </div>
+          </form>
+        `;
+      }
+
+      return `
+        <div id="${isLabelModal ? 'label-modal-overlay' : 'app-modal-overlay'}" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
+          <div id="${isLabelModal ? 'label-modal-box' : 'app-modal-box'}" class="w-full ${maxWidthClass} bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+            <div class="px-5 py-3.5 bg-[#333A7B] text-white flex items-center justify-between no-print">
+              <h3 class="text-sm font-bold">${title}</h3>
+              <button type="button" data-action="close-modal" class="p-1 rounded-lg hover:bg-white/15">
+                <i data-lucide="x" class="w-4 h-4"></i>
+              </button>
+            </div>
+            <div class="p-5">
+              ${bodyHtml}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // MAIN RENDER FUNCTION
+    // =========================================================================
+    function render() {
+      const root = document.getElementById('app-root');
+      if (!root) return;
+
+      const toastHtml = state.toast ? `
+        <div class="fixed top-4 right-4 z-[999999] px-4 py-3 rounded-xl shadow-lg text-xs font-semibold text-white flex items-center gap-2 no-print ${
+          state.toast.type === 'error' ? 'bg-rose-600' : state.toast.type === 'info' ? 'bg-slate-800' : 'bg-emerald-600'
+        }">
+          <i data-lucide="${state.toast.type === 'error' ? 'alert-circle' : 'check-circle-2'}" class="w-4 h-4"></i>
+          <span>${escapeHtml(state.toast.message)}</span>
+        </div>
+      ` : '';
+
+      if (!state.currentUser) {
+        root.innerHTML = toastHtml + renderLoginView();
+        lucide.createIcons();
+        return;
+      }
+
+      let activeContent = '';
+      switch (state.activeMenu) {
+        case 'dashboard': activeContent = renderDashboardView(); break;
+        case 'barang': activeContent = renderBarangView(); break;
+        case 'pinjaman': activeContent = renderPinjamanView(); break;
+        case 'ruangan': activeContent = renderRuanganView(); break;
+        case 'sumber': activeContent = renderSumberView(); break;
+        case 'pengaturan': activeContent = renderPengaturanView(); break;
+        default: activeContent = renderDashboardView();
+      }
+
+      root.innerHTML = `
+        ${toastHtml}
+        ${renderNavigation()}
+        <main class="main-workspace p-4 sm:p-6 max-w-[1440px]">
+          ${renderTopHeader()}
+          ${activeContent}
+        </main>
+        ${renderModal()}
+      `;
+
+      lucide.createIcons();
+      renderCharts();
+    }
+
+    // =========================================================================
+    // EVENT DELEGATION (KLIK, INPUT, & SUBMIT FORM)
+    // =========================================================================
+    const rootEl = document.getElementById('app-root');
+
+    rootEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      const action = btn.dataset.action;
+
+      if (action === 'switch-login-tab') {
+        state.loginTab = btn.dataset.tab;
+        render();
+      } else if (action === 'nav') {
+        state.activeMenu = btn.dataset.menu;
+        state.searchQuery = '';
+        render();
+      } else if (action === 'logout') {
+        handleLogout();
+      } else if (action === 'print') {
+        window.print();
+      } else if (action === 'print-labels') {
+        triggerPrintLabels();
+      } else if (action === 'close-modal') {
+        state.modal = null;
+        render();
+      } else if (action === 'open-modal') {
+        const modalType = btn.dataset.modalType;
+        const mode = btn.dataset.mode || 'add';
+        const id = btn.dataset.id || null;
+        const modul = btn.dataset.modul || null;
+        const labelMode = btn.dataset.labelMode || 'single';
+        let data = null;
+
+        if (modalType === 'cetak-label' && labelMode === 'single' && id) {
+          data = state.barang.find(item => item.id === id) || null;
+        } else if (mode === 'edit' && id && state[modalType]) {
+          data = state[modalType].find(item => item.id === id) || null;
+        }
+
+        state.modal = { type: modalType, mode, data, modul, labelMode, paperSize: 'A4' };
+        render();
+      } else if (action === 'export-excel') {
+        exportToExcel(btn.dataset.modul);
+      } else if (action === 'download-template') {
+        downloadTemplateExcel(btn.dataset.modul);
+      } else if (action === 'confirm-delete') {
+        state.modal = {
+          type: 'confirm-delete',
+          col: btn.dataset.col,
+          id: btn.dataset.id,
+          label: btn.dataset.label
+        };
+        render();
+      } else if (action === 'execute-delete') {
+        deleteData(btn.dataset.col, btn.dataset.id, btn.dataset.label);
+      } else if (action === 'toggle-pinjam') {
+        toggleStatusPinjaman(btn.dataset.id);
+      }
+    });
+
+    rootEl.addEventListener('input', (e) => {
+      if (e.target.id === 'input-search-barang') {
+        state.searchQuery = e.target.value;
+        render();
+        const inp = document.getElementById('input-search-barang');
+        if (inp) {
+          inp.focus();
+          inp.setSelectionRange(inp.value.length, inp.value.length);
+        }
+      } else if (e.target.id === 'input-label-qty' && state.modal) {
+        state.modal.labelQty = e.target.value;
+        render();
+        const qtyInp = document.getElementById('input-label-qty');
+        if (qtyInp) {
+          qtyInp.focus();
+          qtyInp.setSelectionRange(qtyInp.value.length, qtyInp.value.length);
+        }
+      }
+    });
+
+    rootEl.addEventListener('change', (e) => {
+      if (e.target.id === 'select-filter-kondisi') {
+        state.filterKondisi = e.target.value;
+        render();
+      } else if (e.target.id === 'select-filter-ruangan') {
+        state.filterRuangan = e.target.value;
+        render();
+      } else if (e.target.id === 'select-label-paper' && state.modal) {
+        state.modal.paperSize = e.target.value;
+        render();
+      } else if (e.target.id === 'input-import-excel') {
+        const file = e.target.files && e.target.files[0];
+        if (file) handleImportExcelFile(file, e.target.dataset.modul);
+      }
+    });
+
+    rootEl.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const fd = new FormData(form);
+
+      if (form.id === 'form-login-admin') {
+        await handleLoginAdmin(fd.get('email'), fd.get('password'));
+      } else if (form.id === 'form-login-user') {
+        await handleLoginUser(fd.get('username'), fd.get('password'));
+      } else if (form.id === 'form-identitas') {
+        await saveData('identitas', {
+          namaSekolah: fd.get('namaSekolah'),
+          jenjang: fd.get('jenjang'),
+          tahunPelajaran: fd.get('tahunPelajaran'),
+          kepalaSekolah: fd.get('kepalaSekolah'),
+          logoUrl: fd.get('logoUrl')
+        });
+      } else if (form.id === 'form-modal-barang') {
+        const ruanganObj = state.ruangan.find(r => r.id === fd.get('ruanganId'));
+        const sumberObj = state.sumber.find(s => s.id === fd.get('sumberId'));
+        const docId = form.dataset.mode === 'edit' ? form.dataset.id : null;
+        const existingItem = docId ? state.barang.find(b => b.id === docId) : null;
+
+        let bastUrl = (fd.get('bastUrl') || '').trim();
+        let bastNama = bastUrl ? 'Link Google Drive BAST' : (existingItem?.bastNama || '');
+        if (!bastUrl && existingItem?.bastUrl?.startsWith('data:')) {
+          bastUrl = existingItem.bastUrl;
+        }
+
+        const bastFile = fd.get('bastFile');
+        if (bastFile && bastFile.size > 0) {
+          if (bastFile.size > 700 * 1024) {
+            showToast('Ukuran file BAST maksimal 700KB untuk upload langsung. Gunakan Link Google Drive untuk file besar.', 'error');
+            return;
+          }
+          bastUrl = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(bastFile);
+          });
+          bastNama = bastFile.name;
+        }
+
+        await saveData('barang', {
+          kodeBarang: fd.get('kodeBarang'),
+          namaBarang: fd.get('namaBarang'),
+          ruanganId: fd.get('ruanganId'),
+          namaRuangan: ruanganObj ? ruanganObj.namaRuang : '-',
+          sumberId: fd.get('sumberId'),
+          namaSumber: sumberObj ? sumberObj.namaSumber : '-',
+          jumlah: Number(fd.get('jumlah')) || 1,
+          kondisi: fd.get('kondisi'),
+          tahunPerolehan: fd.get('tahunPerolehan'),
+          bastUrl,
+          bastNama,
+          keterangan: fd.get('keterangan')
+        }, docId);
+      } else if (form.id === 'form-modal-pinjaman') {
+        const barangObj = state.barang.find(b => b.id === fd.get('barangId'));
+        await saveData('pinjaman', {
+          kodePinjam: fd.get('kodePinjam'),
+          peminjam: fd.get('peminjam'),
+          barangId: fd.get('barangId'),
+          namaBarang: barangObj ? barangObj.namaBarang : '-',
+          jumlah: Number(fd.get('jumlah')) || 1,
+          tglPinjam: fd.get('tglPinjam'),
+          tglKembali: fd.get('tglKembali'),
+          status: 'Dipinjam',
+          catatan: fd.get('catatan')
+        });
+      } else if (form.id === 'form-modal-ruangan') {
+        const docId = form.dataset.mode === 'edit' ? form.dataset.id : null;
+        await saveData('ruangan', {
+          kodeRuang: fd.get('kodeRuang'),
+          namaRuang: fd.get('namaRuang'),
+          penanggungJawab: fd.get('penanggungJawab'),
+          keterangan: fd.get('keterangan')
+        }, docId);
+      } else if (form.id === 'form-modal-sumber') {
+        const docId = form.dataset.mode === 'edit' ? form.dataset.id : null;
+        await saveData('sumber', {
+          kodeSumber: fd.get('kodeSumber'),
+          namaSumber: fd.get('namaSumber'),
+          keterangan: fd.get('keterangan')
+        }, docId);
+      } else if (form.id === 'form-modal-users') {
+        const docId = form.dataset.mode === 'edit' ? form.dataset.id : null;
+        await saveData('users', {
+          namaLengkap: fd.get('namaLengkap'),
+          username: fd.get('username').trim(),
+          password: fd.get('password'),
+          jabatan: fd.get('jabatan'),
+          role: 'user'
+        }, docId);
+      }
+    });
+
+    // Render Awal
+    render();
+  </script>
+</body>
 </html>
